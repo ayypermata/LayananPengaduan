@@ -27,7 +27,7 @@ class User extends CI_Controller
         $data['image'] = $this->input->post('image');
 
         $idUser = $this->session->userdata('id_user');
-        $id = (int)$idUser;
+        $id = (int) $idUser;
         $data['id_user'] = $id;
 
         $this->form_validation->set_rules('jenis', 'Jenis Pengaduan', 'required|trim');
@@ -66,7 +66,7 @@ class User extends CI_Controller
         $this->session->userdata('email')])->row_array();
 
         $idUser = $this->session->userdata('id_user');
-        $id = (int)$idUser;
+        $id = (int) $idUser;
         $q = "SELECT * FROM lapor_aduan WHERE id_user = $id";
 
         $data['laporpeng'] = $this->db->query($q)->result();

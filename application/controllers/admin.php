@@ -49,6 +49,7 @@ class Admin extends CI_Controller
 
         $data['lapor_aduan'] = $this->db->get_where('lapor_aduan', ['id' => $id])->row_array();
 
+        $data['status'] = $this->input->post('status');
         $data['balasan'] = $this->input->post('balasan');
         $this->form_validation->set_rules('balasan', 'Balasan', 'required|trim');
 
@@ -61,6 +62,7 @@ class Admin extends CI_Controller
         } else {
             $data = [
                 'balasan' => htmlspecialchars($this->input->post('balasan', true)),
+                'status' => htmlspecialchars($this->input->post('status', true)),
             ];
 
             $idku = $this->input->post('id_user');

@@ -17,6 +17,21 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label for="status" class="col-sm-3 col-form-label">Status</label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="status" name="status" value="<?= $lapor_aduan['status']; ?>>>
+                        <option value=">== Pilih Status Aduan ==</option>
+                        <option value="Menunggu Konfirmasi">Menunggu Konfirmasi</option>
+                        <option value="Ditolak">Ditolak</option>
+                        <option value="Sedang Ditanggapi">Sedang Ditanggapi</option>
+                        <option value="Sudah Ditanggulangi">Sudah Ditanggulagi</option>
+                    </select>
+                    <?= form_error('status', '<small class="text-danger pl-3">', '</small>'); ?>
+                    <div class="col-sm-10">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label for="jenis" class="col-sm-3 col-form-label">Jenis Pengaduan</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="jenis" name="jenis" value="<?= $lapor_aduan['jenis']; ?>" readonly>
