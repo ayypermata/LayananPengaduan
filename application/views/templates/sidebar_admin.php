@@ -38,6 +38,37 @@
             <span>Laporan Pengaduan</span>
         </a>
     </li>
+    <!-- Heading -->
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">
+        Status Pengaduan
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="<?= base_url('admin/laporan_belumdiproses'); ?>">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Belum Diproses</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="<?= base_url('admin/laporan_proses'); ?>">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Proses</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="<?= base_url('admin/laporan_selesai'); ?>">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Selesai</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
     <!-- Divider -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="<?= base_url('admin/cetak'); ?>">

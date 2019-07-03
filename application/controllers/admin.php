@@ -18,11 +18,20 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar_admin', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/index', $data);
-        $this->load->view('templates/footer');
+
+        if (null !== $this->session->userdata('email')) {
+            $data['get_data'] = $this->m_aduan->get_data();
+            $data['count_belum'] = $this->m_aduan->count_data('Belum Diproses');
+            $data['count_proses'] = $this->m_aduan->count_data('Proses');
+            $data['count_selesai'] = $this->m_aduan->count_data('Selesai');
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar_admin', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/index', $data);
+            $this->load->view('templates/footer');
+        } else {
+            redirect('home');
+        }
     }
 
     public function laporan()
@@ -31,7 +40,67 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $data['laporpeng'] = $this->db->get('lapor_aduan')->result();
+        $q = "SELECT * FROM lapor_aduan WHERE done != 1";
+
+        $data['laporpeng'] = $this->db->query($q)->result();
+
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar_admin', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/laporan_admin', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function laporan_belumdiproses()
+    {
+
+        $data['title'] = 'Pengaduan - Open';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $q = "SELECT * FROM lapor_aduan WHERE Status = 'Belum Diproses'";
+
+        $data['laporpeng'] = $this->db->query($q)->result();
+
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar_admin', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/laporan_admin', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function laporan_proses()
+    {
+
+        $data['title'] = 'Pengaduan - Open';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $q = "SELECT * FROM lapor_aduan WHERE Status = 'Proses'";
+
+        $data['laporpeng'] = $this->db->query($q)->result();
+
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar_admin', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/laporan_admin', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function laporan_selesai()
+    {
+
+        $data['title'] = 'Pengaduan - Open';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $q = "SELECT * FROM lapor_aduan WHERE done = 1";
+
+        $data['laporpeng'] = $this->db->query($q)->result();
+
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_admin', $data);
@@ -51,7 +120,10 @@ class Admin extends CI_Controller
 
         $data['status'] = $this->input->post('status');
         $data['balasan'] = $this->input->post('balasan');
-        $this->form_validation->set_rules('balasan', 'Balasan', 'required|trim');
+        $now = date('Y-m-d H:i:s');
+
+        $this->form_validation->set_rules('status', 'Status', 'trim');
+        $this->form_validation->set_rules('balasan', 'Balasan', 'trim');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -63,6 +135,7 @@ class Admin extends CI_Controller
             $data = [
                 'balasan' => htmlspecialchars($this->input->post('balasan', true)),
                 'status' => htmlspecialchars($this->input->post('status', true)),
+                'tgl_updateadmin' => $now
             ];
 
             $idku = $this->input->post('id_user');
@@ -72,7 +145,7 @@ class Admin extends CI_Controller
 
             $this->session->set_flashdata(
                 'message',
-                '<div class="alert alert-success" role="alert">Respon Pengaduan Disimpan</div>'
+                '<div class=" alert aler  t -succ es s" rol e= "a ler t">Respon Pengaduan Disimpan</div>'
             );
             redirect('admin/laporan');
         }
@@ -84,6 +157,14 @@ class Admin extends CI_Controller
         $this->m_aduan->hapus($this->uri->segment(3));
 
         redirect('admin/laporan');
+    }
+
+
+    public function done()
+    {
+        $this->m_aduan->done($this->uri->segment(3));
+
+        redirect('user/laporan');
     }
 
     public function cetak()
@@ -103,9 +184,9 @@ class Admin extends CI_Controller
             $pdf->SetFillColor(100, 0, 0);
             $pdf->SetTextColor(255);
             $pdf->SetDrawColor(0, 0, 0);
-            $header = array('No', 'ID', 'Jenis Pengaduan', 'Deskripsi Pengaduan', 'Foto', 'Balasan');
+            $header = array('No', 'ID', 'Jenis Pengaduan', 'Deskripsi Pengaduan', 'Balasan', 'Status');
             // Lebar Header Sesuaikan Jumlahnya dengan Jumlah Field Tabel Database
-            $w = array(6, 9, 35, 120, 40, 70);
+            $w = array(6, 9, 35, 120, 70, 40);
             for ($i = 0; $i < count($header); $i++)
                 $pdf->Cell($w[$i], 7, $header[$i], 1, 0, 'C', true);
             $pdf->Ln();
@@ -121,8 +202,8 @@ class Admin extends CI_Controller
                 $pdf->Cell($w[1], 6, $row->id, 'LR', 0, 'C', $fill);
                 $pdf->Cell($w[2], 6, $row->jenis, 'LR', 0, 'L', $fill);
                 $pdf->Cell($w[3], 6, $row->deskripsi, 'LR', 0, 'L', $fill);
-                $pdf->Cell($w[4], 6, $row->image, 'LR', 0, 'L', $fill);
-                $pdf->Cell($w[5], 6, $row->balasan, ' LR ', 0, ' L ', $fill);
+                $pdf->Cell($w[4], 6, $row->balasan, 'LR', 0, 'L', $fill);
+                $pdf->Cell($w[5], 6, $row->status, ' LR ', 0, ' L ', $fill);
                 $pdf->Ln();
                 $fill = !$fill;
             endforeach;
@@ -130,7 +211,7 @@ class Admin extends CI_Controller
 
             $pdf->Output();
         } else {
-            redirect(' admin');
+            redirect('admin');
         }
     }
 }

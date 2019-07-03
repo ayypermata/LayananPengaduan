@@ -9,27 +9,8 @@
 
     <div class="row">
         <div class="col-lg-8">
-            <?= form_open_multipart('admin/responPengaduan'); ?>
-            <div class="form-group row">
-                <label for="id_user" class="col-sm-3 col-form-label">ID</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" id="id_user" name="id_user" value="<?= $lapor_aduan['id']; ?>" readonly>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="status" class="col-sm-3 col-form-label">Status</label>
-                <div class="col-sm-9">
-                    <select class="form-control" id="status" name="status" value="<?= $lapor_aduan['status']; ?>>>
-                        <option value=">== Pilih Status Aduan ==</option>
-                        <option value="Belum Diproses">Belum Diproses</option>
-                        <option value="Proses">Proses</option>
-                        <option value="Selesai">Selesai</option>
-                    </select>
-                    <?= form_error('status', '<small class="text-danger pl-3">', '</small>'); ?>
-                    <div class="col-sm-10">
-                    </div>
-                </div>
-            </div>
+            <?= form_open_multipart('user/responuser'); ?>
+            <input type="text" class="hidden" id="idku" name="idku" value="<?= $lapor_aduan['id']; ?>">
             <div class="form-group row">
                 <label for="jenis" class="col-sm-3 col-form-label">Jenis Pengaduan</label>
                 <div class="col-sm-9">
@@ -52,7 +33,12 @@
                     </div>
                 </div>
             </div>
-
+            <div class="form-group row">
+                <label for="deskripsi" class="col-sm-3 col-form-label">Balasan Admin</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="<?= $lapor_aduan['balasan']; ?>" readonly>
+                </div>
+            </div>
             <div class="form-group row">
                 <label for="balasan" class="col-sm-3 col-form-label">Balasan</label>
                 <div class="col-sm-9">

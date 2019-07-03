@@ -46,6 +46,7 @@ class User extends CI_Controller
                 'jenis' => htmlspecialchars($this->input->post('jenis', true)),
                 'deskripsi' => $this->input->post('deskripsi', true),
                 'image' => $this->upload(),
+                'status' => "Belum Diproses",
                 'date_create' => time()
             ];
 
@@ -67,7 +68,7 @@ class User extends CI_Controller
 
         $idUser = $this->session->userdata('id_user');
         $id = (int) $idUser;
-        $q = "SELECT * FROM lapor_aduan WHERE id_user = $id";
+        $q = "SELECT * FROM lapor_aduan WHERE id_user =  $id  AND done != 1";
 
         $data['laporpeng'] = $this->db->query($q)->result();
 
@@ -76,6 +77,53 @@ class User extends CI_Controller
         $this->load->view('templates/topbar', $data);
         $this->load->view('user/laporan', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function responuser($id)
+    {
+        $data['title'] = 'Balas Pengaduan';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+
+        $data['lapor_aduan'] = $this->db->get_where('lapor_aduan', ['id' => $id])->row_array();
+
+        $balasan = $this->input->post('balasan');
+        $id_user = $this->input->post('idku');
+        $now = date('Y-m-d H:i:s');
+
+        $this->form_validation->set_rules('balasan', 'Balasan', 'trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('user/respon', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'balasan_user' => htmlspecialchars($this->input->post('balasan', true)),
+                'tgl_updateuser' => $now
+
+            ];
+
+            // $idku = $this->input->post('id_user');
+            $this->db->where('id ', $id_user);
+            $this->db->update('lapor_aduan', $data);
+
+            // $this->db->set('balasan_user', $balasan);
+            // $this->db->set('tgl_updateuser', date());
+            // $this->db->where('id', $id_user);
+            // $this->db->update('lapor_aduan');
+            // var_dump($this->db->last_query());
+            // die();
+
+            $this->session->set_flashdata(
+                'message',
+                '<div class=" alert aler  t -succ es s" rol e= "a ler t">Respon Pengaduan Disimpan</div>'
+            );
+            redirect('user/laporan');
+        }
     }
 
     public function upload()

@@ -4,7 +4,7 @@
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
     <?php echo $this->session->flashdata('message'); ?>
 
-    <a href="<?php echo base_url(); ?>index.php/admin/cetak" target=" _blank"><button class="btn btn-primary btn-user"><i class="fa fa-print"></i>Cetak Laporan</button></a>
+    <a href="<?php echo base_url(); ?>admin/cetak" target=" _blank"><button class="btn btn-primary btn-user"><i class="fa fa-print"></i>Cetak Laporan</button></a>
 
     <p></p>
     <div class="panel-body">
@@ -33,7 +33,7 @@
                                 <a class="image-zoom" href="<?php echo base_url(); ?>/assets/img/upload_lapor/<?= $l->image ?>" data-gal="prettyPhoto[gallery]">
                                     <img height="300" width="150" src="<?php echo base_url(); ?>/assets/img/upload_lapor/<?= $l->image ?>" class="img-fluid w3layouts agileits" alt="">
                                 </a>
-                        <td><?= $l->balasan ?></td>
+                        <td><?= $l->balasan_user ?></td>
                         <td><?= $l->status ?></td>
                         <td>
                             <a href="<?php echo base_url(); ?>admin/responPengaduan/<?php echo $l->id; ?>">
@@ -41,7 +41,6 @@
                             <a href="<?php echo base_url(); ?>/admin/delete/<?php echo $l->id; ?>" onclick="return confirm('Anda yakin Ingin menghapus Data ?')">
                                 <input type="button" value="Hapus" class="tombol small gray"></a>
                         </td>
-
                         </tr>
                     <?php } ?>
                 </tbody>
