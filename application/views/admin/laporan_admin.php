@@ -16,7 +16,8 @@
                         <th>JENIS PENGADUAN</th>
                         <th>DESKRIPSI</th>
                         <th>FOTO</th>
-                        <th>BALASAN</th>
+                        <th>BALASAN USER</th>
+                        <th>TGL BALASAN USER</th>
                         <th>STATUS</th>
                         <th>AKSI</th>
                     </tr>
@@ -34,6 +35,7 @@
                                     <img height="300" width="150" src="<?php echo base_url(); ?>/assets/img/upload_lapor/<?= $l->image ?>" class="img-fluid w3layouts agileits" alt="">
                                 </a>
                         <td><?= $l->balasan_user ?></td>
+                        <td><?= $l->tgl_updateuser ?></td>
                         <td><?= $l->status ?></td>
                         <td>
                             <a href="<?php echo base_url(); ?>admin/responPengaduan/<?php echo $l->id; ?>">

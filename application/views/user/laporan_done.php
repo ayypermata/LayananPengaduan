@@ -2,7 +2,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+    <h1 class="h3 mb-4 text-gray-800">LAPORAN SELESAI (USER)</h1>
 
     <?php echo $this->session->flashdata('message'); ?>
 
@@ -18,9 +18,8 @@
                         <th>DESKRIPSI</th>
                         <th>FOTO</th>
                         <th>BALASAN ADMIN</th>
-                        <th>TGL BALASAN ADMIN</th>
+                        <th>TGL BALAS</th>
                         <th>STATUS</th>
-                        <th>AKSI</th>
                     </tr>
                 </thead>
 
@@ -40,13 +39,6 @@
                         <td><?= $l->balasan ?></td>
                         <td><?= $l->tgl_updateadmin ?></td>
                         <td><?= $l->status ?></td>
-                        <td>
-                            <a href="<?php echo base_url(); ?>user/responuser/<?php echo $l->id; ?>">
-                                <input type="button" value="Edit" class="tombol small gray"></a>
-                            <!-- <a href="<?php echo base_url(); ?>/admin/delete/<?php echo $l->id; ?>" onclick="return confirm('Anda yakin Ingin menghapus Data ?')">
-                                                                            <input type="button" value="Hapus" class="tombol small gray"></a> -->
-                            <a href="<?php echo base_url(); ?>/admin/done/<?php echo $l->id; ?>"><button class="tombol small gray">Selesai</button></a>
-
                         </td>
                         </tr>
                     <?php endforeach; ?>

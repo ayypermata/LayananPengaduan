@@ -10,7 +10,12 @@
     <div class="row">
         <div class="col-lg-8">
             <?= form_open_multipart('user/responuser'); ?>
-            <input type="text" class="hidden" id="idku" name="idku" value="<?= $lapor_aduan['id']; ?>">
+            <div class="form-group row">
+                <label for="jenis" class="col-sm-3 col-form-label">ID</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="idku" name="idku" value="<?= $lapor_aduan['id']; ?>" readonly>
+                </div>
+            </div>
             <div class="form-group row">
                 <label for="jenis" class="col-sm-3 col-form-label">Jenis Pengaduan</label>
                 <div class="col-sm-9">

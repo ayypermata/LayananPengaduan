@@ -52,6 +52,16 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="<?= base_url('user/laporan_selesai'); ?>">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Laporan Selesai</span>
+        </a>
+    </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
     <!-- Heading -->
     <div class="sidebar-heading">
         My Profile

@@ -125,6 +125,24 @@ class User extends CI_Controller
             redirect('user/laporan');
         }
     }
+    public function laporan_selesai()
+    {
+
+        $data['title'] = 'Pengaduan - Open';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $q = "SELECT * FROM lapor_aduan WHERE done = 1";
+
+        $data['laporpeng'] = $this->db->query($q)->result();
+
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/laporan_done', $data);
+        $this->load->view('templates/footer');
+    }
 
     public function upload()
     {

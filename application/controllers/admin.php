@@ -55,7 +55,7 @@ class Admin extends CI_Controller
     public function laporan_belumdiproses()
     {
 
-        $data['title'] = 'Pengaduan - Open';
+        $data['title'] = 'Pengaduan - Belum Diproses';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
@@ -74,7 +74,7 @@ class Admin extends CI_Controller
     public function laporan_proses()
     {
 
-        $data['title'] = 'Pengaduan - Open';
+        $data['title'] = 'Pengaduan - Sedang Diproses';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
@@ -93,7 +93,7 @@ class Admin extends CI_Controller
     public function laporan_selesai()
     {
 
-        $data['title'] = 'Pengaduan - Open';
+        $data['title'] = 'Pengaduan - Selesai';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
@@ -111,7 +111,7 @@ class Admin extends CI_Controller
 
     public function responPengaduan($id)
     {
-        $data['title'] = 'Balas Pengaduan';
+        $data['title'] = 'Balas Pengaduan - Admin';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
@@ -164,7 +164,7 @@ class Admin extends CI_Controller
     {
         $this->m_aduan->done($this->uri->segment(3));
 
-        redirect('user/laporan');
+        redirect('user/laporan_selesai');
     }
 
     public function cetak()
