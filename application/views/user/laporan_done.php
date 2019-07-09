@@ -25,20 +25,20 @@
 
                 <tbody>
                     <?php $no = 1;
-                    foreach ($laporpeng as $l) : ?>
+                    foreach ($lapordone as $d) : ?>
                         <td><?= $no++ ?></td>
-                        <td><?= $l->jenis ?></td>
-                        <td><?= $l->deskripsi ?></td>
+                        <td><?= $d->jenis ?></td>
+                        <td><?= $d->deskripsi ?></td>
                         <td>
                             <span class="image-block img-hover">
-                                <a class="image-zoom" href="<?php echo base_url(); ?>/assets/img/upload_lapor/<?= $l->image ?>" data-gal="prettyPhoto[gallery]">
-                                    <img height="300" width="150" src="<?php echo base_url(); ?>/assets/img/upload_lapor/<?= $l->image ?>" class="img-fluid w3layouts agileits" alt="">
+                                <a class="image-zoom" href="<?php echo base_url(); ?>/assets/img/upload_lapor/<?= $d->image ?>" data-gal="prettyPhoto[gallery]">
+                                    <img height="300" width="150" src="<?php echo base_url(); ?>/assets/img/upload_lapor/<?= $d->image ?>" class="img-fluid w3layouts agileits" alt="">
                                 </a>
                             </span>
                         </td>
-                        <td><?= $l->balasan ?></td>
-                        <td><?= $l->tgl_updateadmin ?></td>
-                        <td><?= $l->status ?></td>
+                        <td><?= $d->balasan ?></td>
+                        <td><?= $d->tgl_updateadmin ?></td>
+                        <td><?= $d->status ?></td>
                         </td>
                         </tr>
                     <?php endforeach; ?>

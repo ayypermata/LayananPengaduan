@@ -132,9 +132,11 @@ class User extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $q = "SELECT * FROM lapor_aduan WHERE done = 1";
+        $idUser = $this->session->userdata('id_user');
+        $id = (int) $idUser;
+        $q = "SELECT * FROM lapor_aduan WHERE id_user =  $id  AND done =1";
 
-        $data['laporpeng'] = $this->db->query($q)->result();
+        $data['lapordone'] = $this->db->query($q)->result();
 
 
         $this->load->view('templates/header', $data);
