@@ -18,19 +18,15 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-
         if (null !== $this->session->userdata('email')) {
-            $data['get_data'] = $this->m_aduan->get_data();
-            $data['count_belum'] = $this->m_aduan->count_data('Belum Diproses');
-            $data['count_proses'] = $this->m_aduan->count_data('Proses');
-            $data['count_selesai'] = $this->m_aduan->count_data('Selesai');
+
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar_admin', $data);
             $this->load->view('templates/topbar', $data);
             $this->load->view('admin/index', $data);
             $this->load->view('templates/footer');
         } else {
-            redirect('home');
+            redirect('admin/index');
         }
     }
 
@@ -164,7 +160,7 @@ class Admin extends CI_Controller
     {
         $this->m_aduan->done($this->uri->segment(3));
 
-        redirect('user/laporan_selesai');
+        redirect('user/isi_kuisioner');
     }
 
     public function cetak()

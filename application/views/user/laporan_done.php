@@ -2,7 +2,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">LAPORAN SELESAI (USER)</h1>
+    <h1 class="h3 mb-4 text-gray-800">LAPORAN SELESAI</h1>
 
     <?php echo $this->session->flashdata('message'); ?>
 
@@ -14,6 +14,7 @@
                 <thead>
                     <tr>
                         <th>NO</th>
+                        <th>KATEGORI</th>
                         <th>JENIS PENGADUAN</th>
                         <th>DESKRIPSI</th>
                         <th>FOTO</th>
@@ -27,6 +28,7 @@
                     <?php $no = 1;
                     foreach ($lapordone as $d) : ?>
                         <td><?= $no++ ?></td>
+                        <td><?= $d->kategori ?></td>
                         <td><?= $d->jenis ?></td>
                         <td><?= $d->deskripsi ?></td>
                         <td>

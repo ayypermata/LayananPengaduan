@@ -11,6 +11,18 @@
 
             <form class="user" method="post" action="<?php base_url('user/lapor'); ?>" enctype="multipart/form-data">
                 <div class="form-group">
+                    <label for="kategori">Kategori</label>
+                    <select class="form-control" id="kategori" name="kategori" value="<?php echo set_value('kategori'); ?>">>
+                        <option value="">== Pilih Kategori ==</option>
+                        <option value="Pengaduan">Pengaduan</option>
+                        <option value="Kritik">Kritik</option>
+                        <option value="Saran">Saran</option>
+                    </select>
+                    <?= form_error('kategori', '<small class="text-danger pl-3">', '</small>'); ?>
+                    <div class="col-sm-10">
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="jenis">Jenis Pengaduan</label>
                     <select class="form-control" id="jenis" name="jenis" value="<?php echo set_value('jenis'); ?>">>
                         <option value="">== Pilih Jenis Pengaduan ==</option>

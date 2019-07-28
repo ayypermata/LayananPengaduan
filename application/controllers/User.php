@@ -3,16 +3,43 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class User extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('adminm');
+    }
     public function index()
     {
         $data['title'] = 'My Profile';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
+        $idUser = $this->session->userdata('id_user');
+        $id = (int) $idUser;
+        $q = "SELECT * FROM lapor_aduan WHERE id_user =  $id";
+
+        $data['data_selesai'] = $this->db->query($q)->result();
+        $data['data_tipe_soal'] = $this->adminm->getAllData('tbl_tipe_soal');
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('user/index', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function isi_kuisioner()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+        $data['header_title'] = 'Kuisioner Kepuasan Pelanggan';
+        $data['form_title'] = 'Kuisioner';
+        $data['data_soal'] = $this->adminm->get_all_soal();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('kuisioner/data_kuisioner', $data);
         $this->load->view('templates/footer');
     }
 
@@ -22,6 +49,7 @@ class User extends CI_Controller
         $this->session->userdata('email')])->row_array();
 
         $data['title'] = 'Lapor Pengaduan';
+        $data['kategori'] = $this->input->post('kategori');
         $data['jenis'] = $this->input->post('jenis');
         $data['deskripsi'] = $this->input->post('deskripsi');
         $data['image'] = $this->input->post('image');
@@ -30,6 +58,9 @@ class User extends CI_Controller
         $id = (int) $idUser;
         $data['id_user'] = $id;
 
+        $now = date('Y-m-d H:i:s');
+
+        $this->form_validation->set_rules('kategori', 'Kategori', 'required|trim');
         $this->form_validation->set_rules('jenis', 'Jenis Pengaduan', 'required|trim');
         $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required|trim');
         $this->form_validation->set_rules('image', 'Sisipkan foto');
@@ -43,11 +74,13 @@ class User extends CI_Controller
         } else {
             $data = [
                 'id_user' => $id,
+                'kategori' => htmlspecialchars($this->input->post('kategori', true)),
                 'jenis' => htmlspecialchars($this->input->post('jenis', true)),
                 'deskripsi' => $this->input->post('deskripsi', true),
                 'image' => $this->upload(),
                 'status' => "Belum Diproses",
-                'date_create' => time()
+                'is_kuisioner' => "True",
+                'date_create' => $now
             ];
 
             $this->db->insert('lapor_aduan', $data);
@@ -84,7 +117,6 @@ class User extends CI_Controller
         $data['title'] = 'Balas Pengaduan';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
-
 
         $data['lapor_aduan'] = $this->db->get_where('lapor_aduan', ['id' => $id])->row_array();
 
@@ -128,7 +160,7 @@ class User extends CI_Controller
     public function laporan_selesai()
     {
 
-        $data['title'] = 'Pengaduan - Open';
+        $data['title'] = 'Pengaduan - Selesai';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
@@ -137,7 +169,6 @@ class User extends CI_Controller
         $q = "SELECT * FROM lapor_aduan WHERE id_user =  $id  AND done =1";
 
         $data['lapordone'] = $this->db->query($q)->result();
-
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

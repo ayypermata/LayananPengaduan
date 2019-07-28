@@ -4,7 +4,7 @@
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
     <?php echo $this->session->flashdata('message'); ?>
 
-    <a href="<?php echo base_url(); ?>admin/cetak" target=" _blank"><button class="btn btn-primary btn-user"><i class="fa fa-print"></i>Cetak Laporan</button></a>
+    <a onclick="printDiv('printableArea')" class="btn btn-warning"> Cetak Laporan </a>
 
     <p></p>
     <div class="panel-body">
@@ -13,6 +13,7 @@
                 <thead>
                     <tr>
                         <th>NO</th>
+                        <th>KATEGORI</th>
                         <th>JENIS PENGADUAN</th>
                         <th>DESKRIPSI</th>
                         <th>FOTO</th>
@@ -28,6 +29,7 @@
                     foreach ($laporpeng as $l) {
                         ?>
                         <td><?= $no++ ?></td>
+                        <td><?= $l->kategori ?></td>
                         <td><?= $l->jenis ?></td>
                         <td><?= $l->deskripsi ?></td>
                         <td> <span class="image-block img-hover">
@@ -48,3 +50,6 @@
                 </tbody>
             </table>
         </div>
+    </div>
+</div>
+</div>

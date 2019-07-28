@@ -35,3 +35,10 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript" src="<?php echo base_url('assets/admin/js/jquery.backstretch.min.js') ?>"></script>
+    <script>
+        $.backstretch("<?php echo base_url('assets/img/background.jpg') ?>", {
+            speed: 500
+        });
+    </script>

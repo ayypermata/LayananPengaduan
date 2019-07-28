@@ -14,6 +14,7 @@
                 <thead>
                     <tr>
                         <th>NO</th>
+                        <th>KATEGORI</th>
                         <th>JENIS PENGADUAN</th>
                         <th>DESKRIPSI</th>
                         <th>FOTO</th>
@@ -28,6 +29,7 @@
                     <?php $no = 1;
                     foreach ($laporpeng as $l) : ?>
                         <td><?= $no++ ?></td>
+                        <td><?= $l->kategori ?></td>
                         <td><?= $l->jenis ?></td>
                         <td><?= $l->deskripsi ?></td>
                         <td>
@@ -43,10 +45,7 @@
                         <td>
                             <a href="<?php echo base_url(); ?>user/responuser/<?php echo $l->id; ?>">
                                 <input type="button" value="Edit" class="tombol small gray"></a>
-                            <!-- <a href="<?php echo base_url(); ?>/admin/delete/<?php echo $l->id; ?>" onclick="return confirm('Anda yakin Ingin menghapus Data ?')">
-                                                                            <input type="button" value="Hapus" class="tombol small gray"></a> -->
                             <a href="<?php echo base_url(); ?>/admin/done/<?php echo $l->id; ?>"><button class="tombol small gray">Selesai</button></a>
-
                         </td>
                         </tr>
                     <?php endforeach; ?>
