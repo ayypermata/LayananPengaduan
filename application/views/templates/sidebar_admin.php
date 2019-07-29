@@ -1,7 +1,6 @@
-<!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    <!-- Sidebar - Brand -->
+
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('admin/index'); ?>">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-comment-alt-exclamation"></i>
@@ -9,12 +8,11 @@
         <div class="sidebar-brand-text mx-9">ADMINISTATOR</div>
     </a>
 
-    <!-- Divider sama GARIS -->
     <hr class="sidebar-divider">
 
     <div class="sidebar-heading">
         Layanan
-    </div>
+    </div> -->
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
@@ -49,26 +47,32 @@
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="<?= base_url('admin/laporan_belumdiproses'); ?>">
-            <i class="fas fa-fw fa-wrench"></i>
+            <i class="fas fa-fw fa-folder"></i>
             <span>Belum Diproses</span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="<?= base_url('admin/laporan_proses'); ?>">
-            <i class="fas fa-fw fa-wrench"></i>
+            <i class="fas fa-fw fa-folder"></i>
             <span>Proses</span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="<?= base_url('admin/laporan_selesai'); ?>">
-            <i class="fas fa-fw fa-wrench"></i>
+            <i class="fas fa-fw fa-folder"></i>
             <span>Selesai</span>
         </a>
     </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
-
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="<?= base_url('admin/hasil_kuisioner'); ?>">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Hasil Kuisioner</span>
+        </a>
+    </li>
+    <hr class="sidebar-divider">
     <!-- Divider -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="<?= base_url('admin/cetak'); ?>">
@@ -103,4 +107,5 @@
     </div>
 
 </ul>
+
 <!-- End of Sidebar -->

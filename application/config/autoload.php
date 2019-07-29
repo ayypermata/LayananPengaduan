@@ -89,7 +89,7 @@
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-    $autoload['helper'] = array('html', 'url', 'file', 'security', 'form');
+    $autoload['helper'] = array('html', 'url', 'file', 'security', 'form', 'currency_format');
 
     /*
 | -------------------------------------------------------------------
@@ -133,4 +133,3 @@
 |	$autoload['model'] = array('first_model' => 'first');
 */
     $autoload['model'] = array();
-    

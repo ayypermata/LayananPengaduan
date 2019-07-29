@@ -7435,6 +7435,7 @@ a.close.disabled {
 .bg-primary {
 	background-color: #4e73df !important;
 }
+
 a.bg-primary:hover,
 a.bg-primary:focus,
 button.bg-primary:hover,
@@ -12744,19 +12745,19 @@ a:focus {
 }
 
 .bg-login-image {
-	background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
+	background: url('../assets/img/background.jpg');
 	background-position: center;
 	background-size: cover;
 }
 
 .bg-register-image {
-	background: url("https://source.unsplash.com/Mv9hjnEUHR4/600x800");
+	background: url('../assets/img/background.jpg');
 	background-position: center;
 	background-size: cover;
 }
 
 .bg-password-image {
-	background: url("https://source.unsplash.com/oWTW-jNGl9I/600x800");
+	background: url('../assets/img/background.jpg');
 	background-position: center;
 	background-size: cover;
 }

@@ -8,6 +8,7 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         $this->load->model('m_cetak');
+        $this->load->model('adminm');
         $this->load->model('m_aduan');
         $this->load->library('cfpdf');
     }
@@ -18,18 +19,37 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        if (null !== $this->session->userdata('email')) {
+        // if (null !== $this->session->userdata('email')) {
 
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar_admin', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('admin/index', $data);
-            $this->load->view('templates/footer');
-        } else {
-            redirect('admin/index');
-        }
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar_admin', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/index', $data);
+        $this->load->view('templates/footer');
+        // } else {
+        //     redirect('admin/index');
+        // }
     }
+    public function hasil_kuisioner()
+    {
+        $data['title'] = 'Dashboard Admin';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
 
+        $data['active_dashboard'] = 'active';
+        $data['data_tipe_soal'] = $this->adminm->getAllData('tbl_tipe_soal');
+
+        // if (null !== $this->session->userdata('email')) {
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar_admin', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/hasil_kuisioner', $data);
+        $this->load->view('templates/footer');
+        // } else {
+        //     redirect('admin/index');
+        // }
+    }
     public function laporan()
     {
         $data['title'] = 'Laporan Pengaduan';

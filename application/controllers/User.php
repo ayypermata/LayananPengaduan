@@ -25,9 +25,30 @@ class User extends CI_Controller
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('user/index', $data);
+        $this->load->view('user/kuisioner', $data);
         $this->load->view('templates/footer');
     }
 
+    public function kuisioner()
+    {
+        $data['title'] = 'My Profile';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+
+        $idUser = $this->session->userdata('id_user');
+        $id = (int) $idUser;
+        $q = "SELECT * FROM lapor_aduan WHERE id_user =  $id";
+
+        $data['data_selesai'] = $this->db->query($q)->result();
+        $data['data_tipe_soal'] = $this->adminm->getAllData('tbl_tipe_soal');
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('user/kuisioner', $data);
+        $this->load->view('templates/footer');
+    }
     public function isi_kuisioner()
     {
         $data['user'] = $this->db->get_where('user', ['email' =>

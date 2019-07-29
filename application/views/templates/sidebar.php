@@ -61,7 +61,7 @@
     </li>
     <!-- Divider -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('user/isi_kuisioner'); ?>">
+        <a class="nav-link collapsed" href="<?= base_url('user/kuisioner'); ?>">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Kuisioner</span>
         </a>
