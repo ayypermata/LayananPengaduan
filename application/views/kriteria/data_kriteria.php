@@ -29,7 +29,7 @@
                             <th>ID</th>
                             <th>Kode Kriteria</th>
                             <th>Nama Kriteria</th>
-                            <th>Bobot Kritera</th>
+                            <th>Bobot Kriteria</th>
                             <th>Perbaikan</th>
                             <th>AKSI</th>
                         </tr>

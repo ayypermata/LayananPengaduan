@@ -67,9 +67,11 @@ class kriteriac extends CI_Controller
                 'data_kriteria' => $this->m_wp->getSelectedData('tbl_kriteria', $id_kriteria),
             );
 
-            $this->load->view('elements/headerv', $data);
-            $this->load->view('pages/kriteria/manage_kriteria');
-            $this->load->view('elements/footerv');
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar_admin', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('kriteria/manage_kriteria', $data);
+            $this->load->view('templates/footer');
         }
     }
 

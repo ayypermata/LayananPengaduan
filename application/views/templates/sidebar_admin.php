@@ -58,7 +58,24 @@
             </div>
         </div>
     </li>
-
+    <hr class="sidebar-divider">
+    <!-- Divider -->
+    <div class="sidebar-heading">
+        Penanganan Pengaduan
+    </div>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collaps3" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-print"></i>
+            <span>Penangan Pengaduan</span>
+        </a>
+        <div id="collaps3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?= base_url('kriteriac/data_kriteria'); ?>">Kriteria</a>
+                <a class="collapse-item" href="<?= base_url('alternatifc/data_alternatif'); ?>">Alternatif</a>
+                <a class="collapse-item" href="<?= base_url('wpc/data_wp'); ?>">Metode Weight Product</a>
+            </div>
+        </div>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
     <li class="nav-item">
@@ -82,24 +99,7 @@
         </div>
     </li>
 
-    <hr class="sidebar-divider">
-    <!-- Divider -->
-    <div class="sidebar-heading">
-        Penanganan Pengaduan
-    </div>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collaps3" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-print"></i>
-            <span>Penangan Pengaduan</span>
-        </a>
-        <div id="collaps3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?= base_url('kriteriac/data_kriteria'); ?>">Kriteria</a>
-                <a class="collapse-item" href="">Alternatif</a>
-                <a class="collapse-item" href="">Metode Weight Product</a>
-            </div>
-        </div>
-    </li>
+
 
     <hr class="sidebar-divider">
 
