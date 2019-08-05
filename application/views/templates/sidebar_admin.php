@@ -12,7 +12,7 @@
 
     <div class="sidebar-heading">
         Layanan
-    </div> -->
+    </div>
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
@@ -44,24 +44,19 @@
     <div class="sidebar-heading">
         Status Pengaduan
     </div>
-
+    <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('admin/laporan_belumdiproses'); ?>">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Belum Diproses</span>
+            <span>Status Pengaduan</span>
         </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('admin/laporan_proses'); ?>">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Proses</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('admin/laporan_selesai'); ?>">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Selesai</span>
-        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?= base_url('admin/laporan_belumdiproses'); ?>">Belum Diproses</a>
+                <a class="collapse-item" href="<?= base_url('admin/laporan_proses'); ?>">Proses</a>
+                <a class="collapse-item" href="<?= base_url('admin/laporan_selesai'); ?>">Selesai</a>
+            </div>
+        </div>
     </li>
 
     <!-- Divider -->
@@ -75,11 +70,37 @@
     <hr class="sidebar-divider">
     <!-- Divider -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('admin/cetak'); ?>">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>Cetak Laporan Pengaduan</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-print"></i>
+            <span>Cetak</span>
         </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?= base_url('admin/cetak'); ?>">Laporan Pengaduan</a>
+                <a class="collapse-item" href="">Hasil Kuisioner</a>
+            </div>
+        </div>
     </li>
+
+    <hr class="sidebar-divider">
+    <!-- Divider -->
+    <div class="sidebar-heading">
+        Penanganan Pengaduan
+    </div>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collaps3" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-print"></i>
+            <span>Penangan Pengaduan</span>
+        </a>
+        <div id="collaps3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?= base_url('kriteriac/data_kriteria'); ?>">Kriteria</a>
+                <a class="collapse-item" href="">Alternatif</a>
+                <a class="collapse-item" href="">Metode Weight Product</a>
+            </div>
+        </div>
+    </li>
+
     <hr class="sidebar-divider">
 
     <!-- Heading -->

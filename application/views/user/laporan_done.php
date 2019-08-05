@@ -18,9 +18,6 @@
                         <th>JENIS PENGADUAN</th>
                         <th>DESKRIPSI</th>
                         <th>FOTO</th>
-                        <th>BALASAN ADMIN</th>
-                        <th>TGL BALAS</th>
-                        <th>STATUS</th>
                     </tr>
                 </thead>
 
@@ -38,9 +35,6 @@
                                 </a>
                             </span>
                         </td>
-                        <td><?= $d->balasan ?></td>
-                        <td><?= $d->tgl_updateadmin ?></td>
-                        <td><?= $d->status ?></td>
                         </td>
                         </tr>
                     <?php endforeach; ?>
