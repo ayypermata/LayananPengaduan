@@ -3,10 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class User extends CI_Controller
 {
+
     public function __construct()
     {
         parent::__construct();
         $this->load->model('adminm');
+        $this->load->model('m_wp');
     }
     public function index()
     {
@@ -34,7 +36,6 @@ class User extends CI_Controller
         $data['title'] = 'My Profile';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
-
 
         $idUser = $this->session->userdata('id_user');
         $id = (int) $idUser;
@@ -64,27 +65,37 @@ class User extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+
     public function lapor()
     {
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $data['title'] = 'Lapor Pengaduan';
         $data['kategori'] = $this->input->post('kategori');
         $data['jenis'] = $this->input->post('jenis');
         $data['deskripsi'] = $this->input->post('deskripsi');
         $data['image'] = $this->input->post('image');
-
         $idUser = $this->session->userdata('id_user');
+
+
+        // $data['data_alternatif'] = $this->m_wp->getAllData('tbl_alternatif');
+        // $data['data_kriteria'] = $this->m_wp->getAllData('tbl_kriteria');
+
         $id = (int) $idUser;
         $data['id_user'] = $id;
-
         $now = date('Y-m-d H:i:s');
+
+        // $namaku = $this->m_wp->get_nama($id);
 
         $this->form_validation->set_rules('kategori', 'Kategori', 'required|trim');
         $this->form_validation->set_rules('jenis', 'Jenis Pengaduan', 'required|trim');
         $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required|trim');
         $this->form_validation->set_rules('image', 'Sisipkan foto');
+        $k = htmlspecialchars($this->input->post('kategori', true));
+        $j = htmlspecialchars($this->input->post('jenis', true));
+        $kategori = $this->m_wp->get_jenis($k);
+        $jenis = $this->m_wp->get_jenis($j);
+
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -94,17 +105,37 @@ class User extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $data = [
+                'id_alternatif' => $id,
                 'id_user' => $id,
-                'kategori' => htmlspecialchars($this->input->post('kategori', true)),
-                'jenis' => htmlspecialchars($this->input->post('jenis', true)),
+                'kategori' => $kategori[0]->nm,
+                'jenis' => $jenis[0]->nm,
                 'deskripsi' => $this->input->post('deskripsi', true),
                 'image' => $this->upload(),
                 'status' => "Belum Diproses",
                 'is_kuisioner' => "True",
                 'date_create' => $now
             ];
-
             $this->db->insert('lapor_aduan', $data);
+            $data4 = [
+                'id_alternatif' => $id
+                // 'nm_alternatif' => $namaku
+            ];
+            $this->db->insert('tbl_alternatif', $data4);
+            $data2 = [
+                'id_nilai_alternatif' => $this->m_wp->id_nilai_alternatif(),
+                'id_alternatif' => $id,
+                'id_kriteria' => "KR-00001",
+                'id_sub_kriteria' => $k
+            ];
+            $this->db->insert('tbl_nilai_alternatif', $data2);
+            $data3 = [
+                'id_nilai_alternatif' => $this->m_wp->id_nilai_alternatif(),
+                'id_alternatif' => $id,
+                'id_kriteria' => "KR-00002",
+                'id_sub_kriteria' => $j
+            ];
+            $this->db->insert('tbl_nilai_alternatif', $data3);
+
             $this->session->set_flashdata(
                 'message',
                 '<div class="alert alert-success" role="alert">Data Pengaduan Disimpan</div>'
@@ -112,6 +143,7 @@ class User extends CI_Controller
             redirect('user/lapor');
         }
     }
+
 
     public function laporan()
     {

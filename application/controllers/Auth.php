@@ -7,6 +7,8 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
+        $this->load->model('adminm');
+        $this->load->model('m_wp');
     }
     public function index()
     {
@@ -94,7 +96,7 @@ class Auth extends CI_Controller
         );
 
         $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
-
+        $no = $this->adminm->id_customer();
 
         if ($this->form_validation->run() == false) {
             $data['title'] = 'User Registration';
@@ -102,7 +104,8 @@ class Auth extends CI_Controller
             $this->load->view('templates/auth_footer');
             $this->load->view('auth/registration');
         } else {
-            $data = [
+            $data = array(
+                'id' => $no,
                 'name' => htmlspecialchars($this->input->post('name', true)),
                 'email' => htmlspecialchars($this->input->post('email', true)),
                 'image' => 'default.jpg',
@@ -113,9 +116,12 @@ class Auth extends CI_Controller
                 'role_id' => 2,
                 'is_active' => 1,
                 'date_create' => time()
-            ];
-
+            );
             $this->db->insert('user', $data);
+
+            $data2['id_alternatif'] = $no;
+            $data2['nm_alternatif'] = htmlspecialchars($this->input->post('name', true));
+            $this->db->insert('tbl_alternatif', $data2);
             $this->session->set_flashdata(
                 'message',
                 '<div class="alert alert-success" role="alert">Congratulation! Your account has been created. Please Login!</div>'
@@ -123,6 +129,7 @@ class Auth extends CI_Controller
             redirect('auth');
         }
     }
+
     public function logout()
     {
         $this->session->unset_userdata('email');

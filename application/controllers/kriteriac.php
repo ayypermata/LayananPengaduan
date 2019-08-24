@@ -6,12 +6,7 @@ class kriteriac extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        if ($this->session->userdata('login') != TRUE) {
-            $this->session->set_flashdata('notif', 'LOGIN GAGAL USERNAME<br> ATAU<br> PASSWORD ANDA SALAH !');
-            redirect('loginc');
-        }; {
-            $this->load->model('m_wp');
-        }
+        $this->load->model('m_wp');
     }
     /*===========================================================================================================================================*/
     /* Data Kriteria */
@@ -26,9 +21,7 @@ class kriteriac extends CI_Controller
 
         $data['header'] = 'Data Kriteria';
         $data['header_title'] = 'Data Kriteria';
-        $data['active_kritera'] = 'active';
         $data['data_kriteria'] =  $this->m_wp->getAllData('tbl_kriteria');
-
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_admin', $data);
@@ -47,25 +40,20 @@ class kriteriac extends CI_Controller
 
         $id = $this->uri->segment(3);
         if ($id == '') {
-            $data = array(
-                'header' => 'Data Kriteria',
-                'header_title' => 'Tambah Data Kriteria',
+            $data['header'] = 'Data Kriteria';
+            $data['header_title'] = 'Tambah Data Kriteria';
+            $data['id'] = $this->m_wp->id_kriteria();
 
-                'active_kriteria' => 'active',
-                'id' => $this->m_wp->id_kriteria(),
-            );
-            $this->load->view('elements/headerv', $data);
-            $this->load->view('pages/kriteria/manage_kriteria');
-            $this->load->view('elements/footerv');
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar_admin', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('kriteria/manage_kriteria', $data);
+            $this->load->view('templates/footer');
         } else {
             $id_kriteria['id_kriteria'] = $id;
-            $data = array(
-                'header' => 'Data Kriteria',
-                'header_title' => 'Edit Data Kriteria',
-
-                'active_kriteria' => 'active',
-                'data_kriteria' => $this->m_wp->getSelectedData('tbl_kriteria', $id_kriteria),
-            );
+            $data['header'] = 'Data Kriteria';
+            $data['header_title'] = 'Edit Data Kriteria';
+            $data['data_kriteria'] = $this->m_wp->getSelectedData('tbl_kriteria', $id_kriteria);
 
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar_admin', $data);
@@ -77,6 +65,10 @@ class kriteriac extends CI_Controller
 
     function prosses_kriteria()
     {
+        $data['title'] = 'Dashboard Admin';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
         $key     = $this->input->post('id_kriteria');
         if ($key != '') {
             $data = array(
@@ -108,8 +100,8 @@ class kriteriac extends CI_Controller
 
     public function sub_kriteria()
     {
-        $data1['title'] = 'Dashboard Admin';
-        $data1['user'] = $this->db->get_where('user', ['email' =>
+        $data['title'] = 'Dashboard Admin';
+        $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
         $id = $this->uri->segment(3);
@@ -117,17 +109,12 @@ class kriteriac extends CI_Controller
 
         if ($id_sub == '') {
             $id_kriteria['id_kriteria'] = $id;
-            $data = array(
-                'header' => 'Data Sub Kriteria',
-                'header_title' => 'Kelola Data Sub Kriteria',
 
-                'active_kriteria' => 'active',
-
-                'id' => $this->m_wp->id_sub_kriteria(),
-
-                'data_kriteria' => $this->m_wp->getSelectedData('tbl_kriteria', $id_kriteria),
-                'data_sub_kriteria' => $this->m_wp->getSelectedData('tbl_sub_kriteria', $id_kriteria),
-            );
+            $data['header'] = 'Data Sub Kriteria';
+            $data['header_title'] = 'Kelola Data Sub Kriteria';
+            $data['id'] = $this->m_wp->id_sub_kriteria();
+            $data['data_kriteria'] = $this->m_wp->getSelectedData('tbl_kriteria', $id_kriteria);
+            $data['data_sub_kriteria'] = $this->m_wp->getSelectedData('tbl_sub_kriteria', $id_kriteria);
         } else {
             $id_kriteria['id_kriteria'] = $id;
             $id_sub_kriteria['id_sub_kriteria'] = $id_sub;
@@ -145,7 +132,7 @@ class kriteriac extends CI_Controller
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_admin', $data);
-        $this->load->view('templates/topbar', $data1);
+        $this->load->view('templates/topbar', $data);
         $this->load->view('kriteria/manage_sub_kriteria', $data);
         $this->load->view('templates/footer');
     }

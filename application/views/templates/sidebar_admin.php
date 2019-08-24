@@ -93,8 +93,8 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?= base_url('admin/cetak'); ?>">Laporan Pengaduan</a>
-                <a class="collapse-item" href="">Hasil Kuisioner</a>
+                <a class="collapse-item" href="<?= base_url('laporanc/data_laporan'); ?>">Laporan Pengaduan</a>
+                <a class="collapse-item" href="<?= base_url('admin/hasil_kuisioner'); ?>">Hasil Kuisioner</a>
             </div>
         </div>
     </li>

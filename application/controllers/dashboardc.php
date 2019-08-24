@@ -55,7 +55,7 @@ class dashboardc extends CI_Controller
         $id_user = $this->input->post('id_user');
         foreach ($data_soal as $row) {
             $data = array(
-                'id_lapor' => $this->session->userdata('id'),
+
                 'id_user' => $this->session->userdata('id_user'),
                 'id_soal' => $row->id_soal,
                 'nilai_jawaban_soal' => $this->input->post('jawaban_soal' . $row->id_soal),

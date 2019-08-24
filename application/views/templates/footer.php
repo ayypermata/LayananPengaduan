@@ -5,6 +5,7 @@
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
                 <span>Copyright &copy; Aplikasi Layanan Pengaduan PT. Pos Indonesia <?= date('Y'); ?> </span>
+                <span> | Created by Ayu Permata Sari </span>
             </div>
         </div>
     </footer>
@@ -57,6 +58,21 @@
     <script>
         $(document).ready(function() {
             $('#laporanaduan').DataTable();
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#laporanaduan1').DataTable();
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#laporanaduan2').DataTable();
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#laporanaduan3').DataTable();
         });
     </script>
 </body>

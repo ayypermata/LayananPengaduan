@@ -8,15 +8,14 @@
 
     <div class="row">
         <div class="col-lg-8">
-
             <form class="user" method="post" action="<?php base_url('user/lapor'); ?>" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="kategori">Kategori</label>
                     <select class="form-control" id="kategori" name="kategori" value="<?php echo set_value('kategori'); ?>">>
                         <option value="">== Pilih Kategori ==</option>
-                        <option value="Pengaduan">Pengaduan</option>
-                        <option value="Kritik">Kritik</option>
-                        <option value="Saran">Saran</option>
+                        <option value="SKR-00001">Keluhan</option>
+                        <option value="SKR-00002">Pertanyaan</option>
+                        <option value="SKR-00003">Saran</option>
                     </select>
                     <?= form_error('kategori', '<small class="text-danger pl-3">', '</small>'); ?>
                     <div class="col-sm-10">
@@ -26,13 +25,12 @@
                     <label for="jenis">Jenis Pengaduan</label>
                     <select class="form-control" id="jenis" name="jenis" value="<?php echo set_value('jenis'); ?>">>
                         <option value="">== Pilih Jenis Pengaduan ==</option>
-                        <option value="Belum Diterima">Belum Diterima</option>
-                        <option value="Kehilangan">Kehilangan</option>
-                        <option value="Terlambat">Keterlambatan</option>
-                        <option value="Tidak Utuh">Kiriman Tidak Utuh</option>
-                        <option value="Pengembalian">Pengembalian</option>
-                        <option value="Layanan Pos">Layanan Pos</option>
-                        <option value="Lainnya">Lainnya..</option>
+                        <option value="SKR-00004">Kehilangan</option>
+                        <option value="SKR-00005">Belum Diterima</option>
+                        <option value="SKR-00006">Keterlambatan</option>
+                        <option value="SKR-00007">Kiriman Tidak Utuh</option>
+                        <option value="SKR-00008">Layanan Pos</option>
+                        <option value="SKR-00009">Lainnya..</option>
                     </select>
                     <?= form_error('jenis', '<small class="text-danger pl-3">', '</small>'); ?>
                     <div class="col-sm-10">
@@ -72,3 +70,13 @@
     });
 </script>
 <!-- End of Main Content -->
+<!-- <li><a href="https://api.whatsapp.com/send?phone=+6287737992577&text=Haloo%20:)%20">Contact Admin : 082347723555</a></li> -->
+
+</div>
+<script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>

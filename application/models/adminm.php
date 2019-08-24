@@ -94,90 +94,30 @@ class adminm extends CI_Model
 
     /*===========================================================================================================================================*/
 
-    public function id_kurir()
-    {
-        $q = $this->db->query("select MAX(RIGHT(id_kurir,4)) as id_max from tbl_kurir");
-        $id = "";
-        if ($q->num_rows() > 0) {
-            foreach ($q->result() as $k) {
-                $tmp = ((int) $k->id_max) + 1;
-                $id = sprintf("%04s", $tmp);
-            }
-        } else {
-            $id = "0001";
-        }
-        return "KR-" . $id;
-    }
-
     /*===========================================================================================================================================*/
 
     public function id_customer()
     {
-        $q = $this->db->query("select MAX(RIGHT(id_customer,4)) as id_max from tbl_customer");
+        $q = $this->db->query("select MAX(RIGHT(id,5)) as id_max from user");
         $id = "";
         if ($q->num_rows() > 0) {
             foreach ($q->result() as $k) {
                 $tmp = ((int) $k->id_max) + 1;
-                $id = sprintf("%04s", $tmp);
+                // $id = sprintf("%05s", $tmp);
             }
         } else {
-            $id = "0001";
+            $id = "00001";
         }
-        return "CT-" . $id;
-    }
-    /*===========================================================================================================================================*/
-    /*===========================================================================================================================================*/
-
-    public function id_pengambilan()
-    {
-        $q = $this->db->query("select MAX(RIGHT(id_pengambilan,4)) as id_max from tbl_pengambilan");
-        $id = "";
-        if ($q->num_rows() > 0) {
-            foreach ($q->result() as $k) {
-                $tmp = ((int) $k->id_max) + 1;
-                $id = sprintf("%04s", $tmp);
-            }
-        } else {
-            $id = "0001";
-        }
-        return "PG-" . $id;
+        return $tmp;
     }
 
-    public function id_resi()
-    {
-        $q = $this->db->query("select MAX(RIGHT(no_resi,4)) as id_max from tbl_pengambilan");
-        $id = "";
-        if ($q->num_rows() > 0) {
-            foreach ($q->result() as $k) {
-                $tmp = ((int) $k->id_max) + 1;
-                $id = sprintf("%04s", $tmp);
-            }
-        } else {
-            $id = "0001";
-        }
-        return "0393093" . $id;
-    }
-
-    function get_all_data_pengambilan()
-    {
-        return $this->db->query("
-            SELECT *
-            FROM tbl_pengambilan a
-            INNER JOIN tbl_customer b ON a.id_customer = b.id_customer
-            INNER JOIN tbl_kurir c ON a.id_kurir = c.id_kurir
-            ORDER BY a.id_pengambilan DESC
-        ")->result();
-    }
 
     function get_status_data_pengambilan($status)
     {
         return $this->db->query("
             SELECT *
-            FROM tbl_pengambilan a
-            INNER JOIN tbl_customer b ON a.id_customer = b.id_customer
-            INNER JOIN tbl_kurir c ON a.id_kurir = c.id_kurir
-            WHERE a.status = '$status'
-            ORDER BY a.id_pengambilan DESC
+            FROM lapor_aduan 
+            WHERE status = '$status'
         ")->result();
     }
 
@@ -194,17 +134,6 @@ class adminm extends CI_Model
         ")->result();
     }
 
-    function get_data_pengambilan_kurir($id)
-    {
-        return $this->db->query("
-            SELECT *
-            FROM tbl_pengambilan a
-            INNER JOIN tbl_customer b ON a.id_customer = b.id_customer
-            INNER JOIN tbl_kurir c ON a.id_kurir = c.id_kurir
-            WHERE a.id_kurir = '$id'
-            ORDER BY a.id_pengambilan DESC
-        ")->result();
-    }
 
     function get_data_pengambilan_customer($id)
     {

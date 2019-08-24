@@ -20,14 +20,6 @@ class m_aduan extends CI_Model
     {
         return $this->db->get($this->table)->result();;
     }
-
-    function count_data($kolom)
-    {
-        $this->db->where('status', $kolom);
-        return $this->db->get($this->table)->num_rows();
-    }
-
-
     function hapus($id)
     {
         $this->db->where('id', $id);

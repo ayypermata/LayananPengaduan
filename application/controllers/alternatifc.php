@@ -6,10 +6,6 @@ class alternatifc extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        if ($this->session->userdata('login') != TRUE) {
-            $this->session->set_flashdata('notif', 'LOGIN GAGAL USERNAME<br> ATAU<br> PASSWORD ANDA SALAH !');
-            redirect('loginc');
-        };
         $this->load->model('m_wp');
     }
     /*===========================================================================================================================================*/
@@ -25,7 +21,6 @@ class alternatifc extends CI_Controller
 
         $data['header'] = 'Data Alternatif';
         $data['header_title'] = 'Data Alternatif';
-        $data['active_alternatif'] = 'active';
         $data['data_alternatif'] =  $this->m_wp->getAllData('tbl_alternatif');
 
         $this->load->view('templates/header', $data);
@@ -38,7 +33,12 @@ class alternatifc extends CI_Controller
 
     public function manage_alternatif()
     {
+        $data1['title'] = 'Dashboard Admin';
+        $data1['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
         $id = $this->uri->segment(3);
+
         if ($id == '') {
             $data = array(
                 'header' => 'Data Alternatif',
@@ -62,9 +62,9 @@ class alternatifc extends CI_Controller
                 'data_alternatif' => $this->m_wp->getSelectedData('tbl_alternatif', $id_alternatif),
             );
 
-            $this->load->view('templates/header', $data);
+            $this->load->view('templates/header', $data1);
             $this->load->view('templates/sidebar_admin', $data);
-            $this->load->view('templates/topbar', $data);
+            $this->load->view('templates/topbar', $data1);
             $this->load->view('alternatif/manage_alternatif', $data);
             $this->load->view('templates/footer');
         }

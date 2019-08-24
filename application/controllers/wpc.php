@@ -6,10 +6,6 @@ class wpc extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        if ($this->session->userdata('login') != TRUE) {
-            $this->session->set_flashdata('notif', 'LOGIN GAGAL USERNAME<br> ATAU<br> PASSWORD ANDA SALAH !');
-            redirect('loginc');
-        };
         $this->load->model('m_wp');
     }
     /*===========================================================================================================================================*/

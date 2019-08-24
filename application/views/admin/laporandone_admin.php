@@ -4,28 +4,29 @@
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
     <?php echo $this->session->flashdata('message'); ?>
 
-    <a href="<?php echo base_url(); ?>admin/cetak" target=" _blank"><button class="btn btn-primary btn-user"><i class="fa fa-print"></i>Cetak Laporan</button></a>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h4 class="m-0 font-weight-bold text-primary">Laporan Selesai</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="laporanaduan" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>JENIS PENGADUAN</th>
+                            <th>DESKRIPSI</th>
+                            <th>FOTO</th>
+                            <th>BALASAN USER</th>
+                            <th>TGL BALASAN USER</th>
+                            <th>STATUS</th>
+                        </tr>
+                    </thead>
 
-    <p></p>
-    <div class="panel-body">
-        <div class="table-responsive">
-            <table id="laporanaduan" class="table table-bordered table-hover" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>NO</th>
-                        <th>JENIS PENGADUAN</th>
-                        <th>DESKRIPSI</th>
-                        <th>FOTO</th>
-                        <th>BALASAN USER</th>
-                        <th>TGL BALASAN USER</th>
-                        <th>STATUS</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <?php $no = 1;
-                    foreach ($laporpeng as $l) {
-                        ?>
+                    <tbody>
+                        <?php $no = 1;
+                        foreach ($laporpeng as $l) {
+                            ?>
                         <td><?= $no++ ?></td>
                         <td><?= $l->jenis ?></td>
                         <td><?= $l->deskripsi ?></td>
@@ -37,7 +38,7 @@
                         <td><?= $l->tgl_updateuser ?></td>
                         <td><?= $l->status ?></td>
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        </div>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>

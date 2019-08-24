@@ -74,65 +74,7 @@ class m_wp extends CI_Model
     /*===========================================================================================================================================*/
     /*===========================================================================================================================================*/
 
-    public function id_transaksi()
-    {
-        $q = $this->db->query("select MAX(RIGHT(id_transaksi,4)) as id_max from tbl_transaksi");
-        $id = "";
-        if ($q->num_rows() > 0) {
-            foreach ($q->result() as $k) {
-                $tmp = ((int) $k->id_max) + 1;
-                $id = sprintf("%04s", $tmp);
-            }
-        } else {
-            $id = "0001";
-        }
-        return "TR-" . $id;
-    }
 
-    function get_all_transaksi()
-    {
-        return $this->db->query("
-            SELECT *
-            FROM tbl_transaksi z
-            JOIN tbl_user y ON z.id_user = y.id_user
-            JOIN tbl_jenis_produk x ON z.id_jenis_produk = x.id_jenis_produk
-        ")->result();
-    }
-
-    function get_user_transaksi($id_user)
-    {
-        return $this->db->query("
-            SELECT *
-            FROM tbl_transaksi z
-            JOIN tbl_user y ON z.id_user = y.id_user
-            JOIN tbl_jenis_produk x ON z.id_jenis_produk = x.id_jenis_produk
-            WHERE z.id_user = '$id_user'
-        ")->result();
-    }
-
-    function get_all_group_transaksi()
-    {
-        return $this->db->query("
-            SELECT *
-            FROM tbl_transaksi z
-            JOIN tbl_user y ON z.id_user = y.id_user
-            JOIN tbl_jenis_produk x ON z.id_jenis_produk = x.id_jenis_produk
-            GROUP BY z.tgl_transaksi
-        ")->result();
-    }
-
-    function get_range_group_transaksi($bulan_awal, $bulan_akhir, $tahun)
-    {
-        return $this->db->query("
-            SELECT *, SUM(z.bsu_transaksi) as total_bsu_transaksi
-            FROM tbl_transaksi z
-            JOIN tbl_user y ON z.id_user = y.id_user
-            JOIN tbl_jenis_produk x ON z.id_jenis_produk = x.id_jenis_produk
-            WHERE MONTH(z.tgl_transaksi) BETWEEN '$bulan_awal' AND '$bulan_akhir' AND YEAR(z.tgl_transaksi) ='$tahun'
-            GROUP BY z.id_user
-            ORDER BY SUM(z.bsu_transaksi) DESC
-        ")->result();
-    }
 
     /*===========================================================================================================================================*/
     /* Data */
@@ -156,6 +98,12 @@ class m_wp extends CI_Model
     /*===========================================================================================================================================*/
     /* Data */
     /*===========================================================================================================================================*/
+
+    public function getKriteria()
+    {
+        $query = $this->db->query('SELECT * FROM tbl_kriteria');
+        return $query->result();
+    }
 
     public function id_kriteria()
     {
@@ -248,121 +196,16 @@ class m_wp extends CI_Model
         ")->result();
     }
 
-    /*===========================================================================================================================================*/
-    /* Data */
-    /*===========================================================================================================================================*/
-
-    function get_range_user_transaksi($id_user, $tgl_awal, $tgl_akhir)
+    function get_jenis($id)
     {
-        return $this->db->query("
-            SELECT *
-            FROM tbl_transaksi z
-            JOIN tbl_user y ON z.id_user = y.id_user
-            JOIN tbl_jenis_produk x ON z.id_jenis_produk = x.id_jenis_produk
-            WHERE z.id_user = '$id_user' AND z.tgl_transaksi BETWEEN '$tgl_awal' AND '$tgl_akhir'
-        ")->result();
+
+        $query = $this->db->query('SELECT nm_sub_kriteria as nm FROM tbl_sub_kriteria WHERE id_sub_kriteria =' . "'$id'");
+        return $query->result();
     }
 
-    function get_user_range_transaksi($id_user, $tgl_awal, $tgl_akhir)
+    function get_nama($id)
     {
-        return $this->db->query("
-            SELECT *
-            FROM tbl_transaksi z
-            JOIN tbl_user y ON z.id_user = y.id_user AND z.id_user = '$id_user'
-            JOIN tbl_jenis_produk x ON z.id_jenis_produk = x.id_jenis_produk
-            WHERE z.tgl_transaksi BETWEEN '$tgl_awal' AND '$tgl_akhir'
-        ")->result();
-    }
-
-    function get_range_absensi($tgl_awal, $tgl_akhir)
-    {
-        return $this->db->query("
-            SELECT *
-            FROM tbl_absensi a
-            LEFT JOIN tbl_user b on a.id_user = b.id_user
-            WHERE a.tgl_absensi BETWEEN '$tgl_awal' AND '$tgl_akhir'
-        ")->result();
-    }
-
-    function get_range_user_absensi($id_user, $tgl_awal, $tgl_akhir)
-    {
-        return $this->db->query("
-            SELECT *
-            FROM tbl_absensi a
-            LEFT JOIN tbl_user b on a.id_user = b.id_user
-            WHERE a.id_user = '$id_user' AND a.tgl_absensi BETWEEN '$tgl_awal' AND '$tgl_akhir'
-        ")->result();
-    }
-
-    function get_bulan_transaksi($bulan, $tahun)
-    {
-        return $this->db->query("
-            SELECT *
-            FROM tbl_transaksi z
-            JOIN tbl_user y ON z.id_user = y.id_user
-            JOIN tbl_jenis_produk x ON z.id_jenis_produk = x.id_jenis_produk
-            WHERE MONTH(z.tgl_transaksi) = '$bulan' AND YEAR(z.tgl_transaksi) = '$tahun'
-        ")->result();
-    }
-
-    function get_bulan_user_transaksi($id_user, $bulan, $tahun)
-    {
-        return $this->db->query("
-            SELECT *
-            FROM tbl_transaksi z
-            JOIN tbl_user y ON z.id_user = y.id_user
-            JOIN tbl_jenis_produk x ON z.id_jenis_produk = x.id_jenis_produk
-            WHERE z.id_user= '$id_user' AND MONTH(z.tgl_transaksi) = '$bulan' AND YEAR(z.tgl_transaksi) = '$tahun'
-        ")->result();
-    }
-
-    function get_bulan_absensi($bulan, $tahun)
-    {
-        return $this->db->query("
-            SELECT *
-            FROM tbl_absensi a
-            LEFT JOIN tbl_user b on a.id_user = b.id_user
-            WHERE MONTH(a.tgl_absensi) = '$bulan' AND YEAR(a.tgl_absensi) = '$tahun'
-        ")->result();
-    }
-
-    function get_bulan_user_absensi($id_user, $bulan, $tahun)
-    {
-        return $this->db->query("
-            SELECT *
-            FROM tbl_absensi a
-            LEFT JOIN tbl_user b on a.id_user = b.id_user
-            WHERE a.id_user = '$id_user' AND MONTH(a.tgl_absensi) = '$bulan' AND YEAR(a.tgl_absensi) = '$tahun'
-        ")->result();
-    }
-
-    function group_bulan_absensi()
-    {
-        return $this->db->query("
-            SELECT *, MONTH(a.tgl_absensi) as bulan,  YEAR(a.tgl_absensi) as tahun
-            FROM tbl_absensi a
-            LEFT JOIN tbl_user b on a.id_user = b.id_user
-            GROUP BY MONTH(a.tgl_absensi), YEAR(a.tgl_absensi)
-        ")->result();
-    }
-
-    function get_all_ranger()
-    {
-        return $this->db->query("
-            SELECT *
-            FROM tbl_user a
-            WHERE a.level_user = 'Ranger'
-        ")->result();
-    }
-
-    function get_pendapatan_bsu($id_user, $bulan, $tahun)
-    {
-        return $this->db->query("
-            SELECT *
-            FROM tbl_transaksi z
-            JOIN tbl_user y ON z.id_user = y.id_user
-            JOIN tbl_jenis_produk x ON z.id_jenis_produk = x.id_jenis_produk
-            WHERE z.id_user = '$id_user' AND MONTH(z.tgl_transaksi) = '$bulan' AND YEAR(z.tgl_transaksi) = '$tahun' AND x.komisi_jenis_produk = 'Ya'
-        ")->result();
+        $query = $this->db->query('SELECT name FROM user WHERE id =' . "'$id'");
+        return $query->result();
     }
 }

@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>
-        <?php echo $title; ?>
+        Aplikasi Layanan Pengaduan PT. Pos Indonesia
     </title>
 
     <!-- Custom fonts for this template-->

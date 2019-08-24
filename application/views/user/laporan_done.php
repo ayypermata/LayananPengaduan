@@ -2,28 +2,31 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">LAPORAN SELESAI</h1>
 
     <?php echo $this->session->flashdata('message'); ?>
 
     <html>
 
-    <div class="panel-body">
-        <div class="table-responsive">
-            <table id="laporanaduan" class="table table-bordered table-hover" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>NO</th>
-                        <th>KATEGORI</th>
-                        <th>JENIS PENGADUAN</th>
-                        <th>DESKRIPSI</th>
-                        <th>FOTO</th>
-                    </tr>
-                </thead>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h4 class="m-0 font-weight-bold text-primary">Laporan Pengaduan</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="laporanaduan" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>NO</th>
+                            <th>KATEGORI</th>
+                            <th>JENIS PENGADUAN</th>
+                            <th>DESKRIPSI</th>
+                            <th>FOTO</th>
+                        </tr>
+                    </thead>
 
-                <tbody>
-                    <?php $no = 1;
-                    foreach ($lapordone as $d) : ?>
+                    <tbody>
+                        <?php $no = 1;
+                        foreach ($lapordone as $d) : ?>
                         <td><?= $no++ ?></td>
                         <td><?= $d->kategori ?></td>
                         <td><?= $d->jenis ?></td>
@@ -37,10 +40,12 @@
                         </td>
                         </td>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+
 
     </html>
