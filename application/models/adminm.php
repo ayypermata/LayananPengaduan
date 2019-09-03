@@ -121,6 +121,14 @@ class adminm extends CI_Model
         ")->result();
     }
 
+    function get_tanggal_masuk($tanggal)
+    {
+        return $this->db->query("
+            SELECT *
+            FROM tbl_alternatif 
+            WHERE tgl_masuk = '$tanggal'
+        ")->result();
+    }
 
     function get_data_pengambilan($id)
     {

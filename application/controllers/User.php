@@ -77,15 +77,10 @@ class User extends CI_Controller
         $data['image'] = $this->input->post('image');
         $idUser = $this->session->userdata('id_user');
 
-
-        // $data['data_alternatif'] = $this->m_wp->getAllData('tbl_alternatif');
-        // $data['data_kriteria'] = $this->m_wp->getAllData('tbl_kriteria');
-
         $id = (int) $idUser;
         $data['id_user'] = $id;
         $now = date('Y-m-d H:i:s');
 
-        // $namaku = $this->m_wp->get_nama($id);
 
         $this->form_validation->set_rules('kategori', 'Kategori', 'required|trim');
         $this->form_validation->set_rules('jenis', 'Jenis Pengaduan', 'required|trim');
@@ -116,23 +111,25 @@ class User extends CI_Controller
                 'date_create' => $now
             ];
             $this->db->insert('lapor_aduan', $data);
-            $data4 = [
-                'id_alternatif' => $id
-                // 'nm_alternatif' => $namaku
+            $data1 = [
+                'id_alternatif' => $id,
+                'tgl_masuk' => $now
             ];
-            $this->db->insert('tbl_alternatif', $data4);
+            $this->db->insert('tbl_alternatif', $data1);
             $data2 = [
                 'id_nilai_alternatif' => $this->m_wp->id_nilai_alternatif(),
                 'id_alternatif' => $id,
                 'id_kriteria' => "KR-00001",
-                'id_sub_kriteria' => $k
+                'id_sub_kriteria' => $k,
+                'tgl_masuk' => $now
             ];
             $this->db->insert('tbl_nilai_alternatif', $data2);
             $data3 = [
                 'id_nilai_alternatif' => $this->m_wp->id_nilai_alternatif(),
                 'id_alternatif' => $id,
                 'id_kriteria' => "KR-00002",
-                'id_sub_kriteria' => $j
+                'id_sub_kriteria' => $j,
+                'tgl_masuk' => $now
             ];
             $this->db->insert('tbl_nilai_alternatif', $data3);
 

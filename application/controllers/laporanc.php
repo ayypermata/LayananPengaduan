@@ -22,11 +22,16 @@ class laporanc extends CI_Controller
         $data['form_title'] = 'Tabel Data Laporan';
         $data['data_laporan'] = $this->adminm->get_status_data_pengambilan($status);
 
-
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_admin', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('laporan/data_laporan', $data);
         $this->load->view('templates/footer');
     }
+    // public function data_tanggal()
+    // {
+    //     $tanggal = $this->input->post('tgl_masuk');
+    //     $data['tanggal_masuk'] = $this->adminm->get_tanggal_masuk($tanggal);
+
+    // }
 }

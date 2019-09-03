@@ -7,6 +7,7 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('m_wp');
         $this->load->model('m_cetak');
         $this->load->model('adminm');
         $this->load->model('m_aduan');
@@ -59,7 +60,6 @@ class Admin extends CI_Controller
         $q = "SELECT * FROM lapor_aduan WHERE done != 1";
 
         $data['laporpeng'] = $this->db->query($q)->result();
-
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_admin', $data);

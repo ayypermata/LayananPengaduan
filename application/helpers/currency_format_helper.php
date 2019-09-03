@@ -3,17 +3,6 @@
 
 if (!function_exists('currency_format')) {
 
-    function currency_format($number)
-
-    {
-        if ($number != '') {
-            return 'Rp ' . number_format($number, 2, ',', '.');
-        } else {
-            return 0;
-        }
-    }
-
-
     function count_jawaban($id_soal, $nilai)
     {
         global $CI;
@@ -33,19 +22,19 @@ if (!function_exists('currency_format')) {
         global $CI;
 
         switch ($nilai) {
-            case $nilai >= 80 && $nilai <= 160;
+            case $nilai >= 40 && $nilai <= 80;
                 $data = "Sangat Tidak Setuju";
                 break;
-            case $nilai >= 161 && $nilai <= 240;
+            case $nilai >= 80 && $nilai <= 120;
                 $data = "Kurang Setuju";
                 break;
-            case $nilai >= 241 && $nilai <= 320;
+            case $nilai >= 120 && $nilai <= 160;
                 $data = "Cukup Setuju";
                 break;
-            case $nilai >= 321 && $nilai <= 400;
+            case $nilai >= 160 && $nilai <= 200;
                 $data = "Setuju";
                 break;
-            case $nilai >= 401 && $nilai <= 480;
+            case $nilai >= 200 && $nilai <= 240;
                 $data = "Sangat Setuju";
                 break;
             default:
@@ -61,23 +50,23 @@ if (!function_exists('currency_format')) {
         global $CI;
 
         switch ($nilai) {
-            case $nilai >= 80 && $nilai <= 160;
+            case $nilai >= 40 && $nilai <= 80;
                 $data = "Sangat Tidak Setuju";
                 break;
-            case $nilai >= 161 && $nilai <= 240;
+            case $nilai >= 80 && $nilai <= 120;
                 $data = "Kurang Setuju";
                 break;
-            case $nilai >= 241 && $nilai <= 320;
+            case $nilai >= 120 && $nilai <= 160;
                 $data = "Cukup Setuju";
                 break;
-            case $nilai >= 321 && $nilai <= 400;
+            case $nilai >= 160 && $nilai <= 200;
                 $data = "Setuju";
                 break;
-            case $nilai >= 401 && $nilai <= 480;
+            case $nilai >= 200 && $nilai <= 240;
                 $data = "Sangat Setuju";
                 break;
             default:
-                $data = "Tidak Termasuk Dalam Range";
+                $data = "";
                 break;
         }
 
@@ -312,24 +301,5 @@ if (!function_exists('currency_format')) {
         }
 
         return $bulan; //print tanggal
-    }
-
-    function pendapatan_absensi($id_user, $bulan, $tahun)
-    {
-        global $CI;
-
-
-        $CI->db->select('*');
-        $CI->db->from('tbl_absensi');
-        $CI->db->WHERE('id_user', $id_user);
-        $CI->db->WHERE('MONTH(tgl_absensi)', $bulan);
-        $CI->db->WHERE('YEAR(tgl_absensi)', $tahun);
-
-        $query = $CI->db->get();
-        $jumlah = $query->num_rows();
-
-        $data  = $jumlah * 20000;
-
-        return $data;
     }
 }

@@ -14,12 +14,6 @@
 
             echo '<div class="alert btn-block alert-error fade in btn btn-danger"><button type="button" class="close" data-dismiss="alert">×</button><strong>' . $message . '</strong></div>';
         } ?>
-        <div align="left">
-            <a href="<?php echo site_url('alternatifc/manage_alternatif'); ?>" class="btn btn-default btn-round"> <i class="fa fa-plus-circle"></i> Tambah
-            </a>
-
-        </div>
-
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h4 class="m-0 font-weight-bold text-primary">Data Alternatif</h4>
@@ -31,11 +25,8 @@
                             <tr>
                                 <th>NO</th>
                                 <th>ID</th>
-                                <th>Alternatif</th>
-                                <th>AKSI</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             <?php
                             $no = 1;
@@ -45,14 +36,7 @@
                             <tr>
                                 <td><?php echo $no++; ?></td>
                                 <td><?php echo 'Al-000' . $row->id_alternatif; ?></td>
-                                <td><?php echo $row->nm_alternatif; ?></td>
-                                <td>
-                                    <a href="<?php echo site_url('alternatifc/manage_alternatif/' . $row->id_alternatif); ?>" class="btn btn-default btn-xs"> <i class="fa fa-edit"></i> Ubah
-                                    </a>
-
-                                    <a href="<?php echo site_url('alternatifc/proses_hapus_alternatif/' . $row->id_alternatif); ?>" class="btn btn-default btn-xs" onclick="return confirm('Yakin ingin menghapus data ? ')"> <i class="fa fa-trash-o"></i> Hapus
-                                    </a>
-                                </td>
+                                <!-- <td><?php echo $row->nm_alternatif; ?></td> -->
                             </tr>
                             <?php }
                             }

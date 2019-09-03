@@ -13,9 +13,9 @@
                     <label for="kategori">Kategori</label>
                     <select class="form-control" id="kategori" name="kategori" value="<?php echo set_value('kategori'); ?>">>
                         <option value="">== Pilih Kategori ==</option>
-                        <option value="SKR-00001">Keluhan</option>
-                        <option value="SKR-00002">Pertanyaan</option>
-                        <option value="SKR-00003">Saran</option>
+                        <option value="SKR-00001">Kategori Berat</option>
+                        <option value="SKR-00002">Kategori Sedang</option>
+                        <option value="SKR-00003">Kategori Ringan</option>
                     </select>
                     <?= form_error('kategori', '<small class="text-danger pl-3">', '</small>'); ?>
                     <div class="col-sm-10">

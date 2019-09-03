@@ -7,6 +7,7 @@ class wpc extends CI_Controller
     {
         parent::__construct();
         $this->load->model('m_wp');
+        $this->load->model('adminm');
     }
     /*===========================================================================================================================================*/
     /* Data Alternatif */
@@ -18,13 +19,20 @@ class wpc extends CI_Controller
         $data['title'] = 'Dashboard Admin';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
+        $q = "SELECT * FROM lapor_aduan WHERE done != 1";
 
+        $tanggal = $this->input->post('tanggal');
+
+
+        $data['laporpeng'] = $this->db->query($q)->result();
         $data['header'] = 'Data Alternatif';
         $data['header_title'] = 'Data Alternatif';
         $data['active_wp'] = 'active';
         $data['data_alternatif'] = $this->m_wp->getAllData('tbl_alternatif');
         $data['data_kriteria'] = $this->m_wp->getAllData('tbl_kriteria');
         $data['data_nilai'] = $this->m_wp->getAllData('tbl_nilai_alternatif');
+        $data['data_alternatif'] = $this->adminm->get_tanggal_masuk($tanggal);
+
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_admin', $data);

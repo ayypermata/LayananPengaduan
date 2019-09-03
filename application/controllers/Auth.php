@@ -119,9 +119,9 @@ class Auth extends CI_Controller
             );
             $this->db->insert('user', $data);
 
-            $data2['id_alternatif'] = $no;
-            $data2['nm_alternatif'] = htmlspecialchars($this->input->post('name', true));
-            $this->db->insert('tbl_alternatif', $data2);
+            // $data2['id_alternatif'] = $no;
+            // $data2['nm_alternatif'] = htmlspecialchars($this->input->post('name', true));
+            // $this->db->insert('tbl_alternatif', $data2);
             $this->session->set_flashdata(
                 'message',
                 '<div class="alert alert-success" role="alert">Congratulation! Your account has been created. Please Login!</div>'

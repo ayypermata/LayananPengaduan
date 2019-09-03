@@ -16,7 +16,7 @@
                                 <select class="form-control" name="status" required>
                                     <option value="">Pilih Status</option>
                                     <option value="Belum Diproses">Belum Diproses</option>
-                                    <option value="Sedang Diproses">Sedang Diproses</option>
+                                    <option value="Proses">Sedang Diproses</option>
                                     <option value="Selesai">Selesai</option>
                                     <option value="Batal">Batal</option>
                                 </select>
@@ -84,7 +84,7 @@
 
 <div id="printableArea" class="visibility">
     <div align="center">
-        <h3>Laporan Pengaduan</h3>
+        <h3>Data Laporan Pengaduan</h3>
     </div>
     <div class="panel-body">
         <table class="table table-bordered" id="laporanaduan" width="100%" cellspacing="0">

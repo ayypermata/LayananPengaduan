@@ -40,7 +40,6 @@ function bobot_kriteria($id_kriteria)
     return $data;
 }
 
-
 function total_bobot_sub_kriteria($id_sub_kriteria, $id_kriteria)
 {
     global $CI;
@@ -158,7 +157,6 @@ function bobot_value_sub_kriteria($id_alternatif, $id_kriteria)
     return $data;
 }
 
-
 function nm_sub_kriteria($id_sub_kriteria)
 {
     global $CI;
@@ -175,22 +173,6 @@ function nm_sub_kriteria($id_sub_kriteria)
     return $data;
 }
 
-function get_nilai_alternatif($id_alternatif)
-{
-    global $CI;
-
-    $data = 2;
-    $data2 = 1;
-    $data_row = $CI->m_wp->get_nilai_alternatif($id_alternatif);
-
-    foreach ($data_row as $row) {
-        $bobot_sub_kriteria = bobot_sub_kriteria($row->id_sub_kriteria);
-        $bobot_global_sub_kriteria = bobot_global_sub_kriteria($row->id_sub_kriteria, $row->id_kriteria);
-
-        $data2 *= number_format(pow($bobot_sub_kriteria, $bobot_global_sub_kriteria), 9);
-    }
-    return $data2;
-}
 
 function convert_month($month)
 {
@@ -236,23 +218,4 @@ function convert_month($month)
     }
 
     return $bulan; //print tanggal
-}
-
-function pendapatan_absensi($id_user, $bulan, $tahun)
-{
-    global $CI;
-
-
-    $CI->db->select('*');
-    $CI->db->from('tbl_absensi');
-    $CI->db->WHERE('id_user', $id_user);
-    $CI->db->WHERE('MONTH(tgl_absensi)', $bulan);
-    $CI->db->WHERE('YEAR(tgl_absensi)', $tahun);
-
-    $query = $CI->db->get();
-    $jumlah = $query->num_rows();
-
-    $data  = $jumlah * 20000;
-
-    return $data;
 }
