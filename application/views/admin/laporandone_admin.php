@@ -27,17 +27,17 @@
                         <?php $no = 1;
                         foreach ($laporpeng as $l) {
                             ?>
-                        <td><?= $no++ ?></td>
-                        <td><?= $l->jenis ?></td>
-                        <td><?= $l->deskripsi ?></td>
-                        <td> <span class="image-block img-hover">
-                                <a class="image-zoom" href="<?php echo base_url(); ?>/assets/img/upload_lapor/<?= $l->image ?>" data-gal="prettyPhoto[gallery]">
-                                    <img height="300" width="150" src="<?php echo base_url(); ?>/assets/img/upload_lapor/<?= $l->image ?>" class="img-fluid w3layouts agileits" alt="">
-                                </a>
-                        <td><?= $l->balasan_user ?></td>
-                        <td><?= $l->tgl_updateuser ?></td>
-                        <td><?= $l->status ?></td>
-                        </tr>
+                            <td><?= $no++ ?></td>
+                            <td><?= $l->jenis ?></td>
+                            <td><?= $l->deskripsi ?></td>
+                            <td> <span class="image-block img-hover">
+                                    <a class="image-zoom" href="<?php echo base_url(); ?>/assets/img/upload_lapor/<?= $l->image ?>" data-gal="prettyPhoto[gallery]">
+                                        <img height="300" width="150" src="<?php echo base_url(); ?>/assets/img/upload_lapor/<?= $l->image ?>" class="img-fluid w3layouts agileits" alt="">
+                                    </a>
+                            <td><?= $l->balasan_user ?></td>
+                            <td><?= $l->tgl_updateuser ?></td>
+                            <td><?= $l->status ?></td>
+                            </tr>
                         <?php } ?>
                     </tbody>
                 </table>

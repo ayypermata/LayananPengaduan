@@ -30,6 +30,29 @@
         </div>
     </div>
 </section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-primary"><?php echo $header_title2; ?></h4>
+            </div>
+            <div class="container-fluid">
+                <div class="block-header">
+                    <form method="post" action="<?php echo site_url('laporanc/data_laporan'); ?>">
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label>PILIH TANGGAL</label>
+                                <input type="date" name="tanggal_awal">
+                                <label> sampai tanggal </label>
+                                <input type="date" name="tanggal_akhir">
+                                <input type="submit" value="FILTER">
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</section>
+
 
 <section class="content">
     <div class="container-fluid">
@@ -61,13 +84,28 @@
                                 if (isset($data_laporan)) {
                                     foreach ($data_laporan as $row) {
                                         ?>
-                                <tr>
-                                    <td><?php echo $no++; ?></td>
-                                    <td><?php echo $row->id; ?></td>
-                                    <td><?php echo $row->kategori; ?></td>
-                                    <td><?php echo $row->jenis; ?></td>
-                                    <td><?php echo $row->date_create; ?></td>
-                                </tr>
+                                        <tr>
+                                            <td><?php echo $no++; ?></td>
+                                            <td><?php echo $row->id; ?></td>
+                                            <td><?php echo $row->kategori; ?></td>
+                                            <td><?php echo $row->jenis; ?></td>
+                                            <td><?php echo $row->date_create; ?></td>
+                                        </tr>
+                                <?php }
+                                }
+                                ?>
+                                <?php
+                                $no = 1;
+                                if (isset($data_per_tanggal)) {
+                                    foreach ($data_per_tanggal as $row) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $no++; ?></td>
+                                            <td><?php echo $row->id; ?></td>
+                                            <td><?php echo $row->kategori; ?></td>
+                                            <td><?php echo $row->jenis; ?></td>
+                                            <td><?php echo $row->date_create; ?></td>
+                                        </tr>
                                 <?php }
                                 }
                                 ?>
@@ -104,14 +142,30 @@
                 if (isset($data_laporan)) {
                     foreach ($data_laporan as $row) {
                         ?>
-                <tr>
-                    <td><?php echo $no++; ?></td>
-                    <td><?php echo $row->id; ?></td>
-                    <td><?php echo $row->kategori; ?></td>
-                    <td><?php echo $row->jenis; ?></td>
-                    <td><?php echo $row->status; ?></td>
-                    <td><?php echo $row->date_create; ?></td>
-                </tr>
+                        <tr>
+                            <td><?php echo $no++; ?></td>
+                            <td><?php echo $row->id; ?></td>
+                            <td><?php echo $row->kategori; ?></td>
+                            <td><?php echo $row->jenis; ?></td>
+                            <td><?php echo $row->status; ?></td>
+                            <td><?php echo $row->date_create; ?></td>
+                        </tr>
+                <?php }
+                }
+                ?>
+                <?php
+                $no = 1;
+                if (isset($data_per_tanggal)) {
+                    foreach ($data_per_tanggal as $row) {
+                        ?>
+                        <tr>
+                            <td><?php echo $no++; ?></td>
+                            <td><?php echo $row->id; ?></td>
+                            <td><?php echo $row->kategori; ?></td>
+                            <td><?php echo $row->jenis; ?></td>
+                            <td><?php echo $row->status; ?></td>
+                            <td><?php echo $row->date_create; ?></td>
+                        </tr>
                 <?php }
                 }
                 ?>

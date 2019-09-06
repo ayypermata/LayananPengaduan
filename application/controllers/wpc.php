@@ -22,7 +22,8 @@ class wpc extends CI_Controller
         $q = "SELECT * FROM lapor_aduan WHERE done != 1";
 
         $tanggal = $this->input->post('tanggal');
-
+        $tanggal_awal = $this->input->post('tanggal_awal');
+        $tanggal_akhir = $this->input->post('tanggal_akhir');
 
         $data['laporpeng'] = $this->db->query($q)->result();
         $data['header'] = 'Data Alternatif';
@@ -31,8 +32,8 @@ class wpc extends CI_Controller
         $data['data_alternatif'] = $this->m_wp->getAllData('tbl_alternatif');
         $data['data_kriteria'] = $this->m_wp->getAllData('tbl_kriteria');
         $data['data_nilai'] = $this->m_wp->getAllData('tbl_nilai_alternatif');
-        $data['data_alternatif'] = $this->adminm->get_tanggal_masuk($tanggal);
-
+        $data['data_alternatif'] = $this->adminm->get_tanggal_masuk($tanggal_awal);
+        $data['data_alternatif'] = $this->adminm->get_rentang_tanggal($tanggal_awal, $tanggal_akhir);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_admin', $data);
@@ -57,20 +58,6 @@ class wpc extends CI_Controller
 
         $this->m_wp->insertData('tbl_nilai_alternatif', $data);
         redirect("wpc/data_wp");
-
-        // $id_delete = array(
-        //     'id_alternatif' => $this->input->post('id_alternatif'),
-        //     'id_kriteria' => $this->input->post('id_kriteria'),
-        // );
-        // $this->m_wp->deleteData('tbl_nilai_alternatif', $id_delete);
-        // $data = array(
-        //     'id_nilai_alternatif' => $this->m_wp->id_nilai_alternatif(),
-        //     'id_alternatif' => $this->input->post('id_alternatif'),
-        //     'id_kriteria' => $this->input->post('id_kriteria'),
-        //     'id_sub_kriteria' => $this->input->post('id_sub_kriteria'),
-        // );
-        // $this->m_wp->insertData('tbl_nilai_alternatif', $data);
-        // redirect("wpc/data_wp");
     }
 
     function proses_hapus_wp()

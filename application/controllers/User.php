@@ -189,20 +189,12 @@ class User extends CI_Controller
 
             ];
 
-            // $idku = $this->input->post('id_user');
             $this->db->where('id ', $id_user);
             $this->db->update('lapor_aduan', $data);
 
-            // $this->db->set('balasan_user', $balasan);
-            // $this->db->set('tgl_updateuser', date());
-            // $this->db->where('id', $id_user);
-            // $this->db->update('lapor_aduan');
-            // var_dump($this->db->last_query());
-            // die();
-
             $this->session->set_flashdata(
                 'message',
-                '<div class=" alert aler  t -succ es s" rol e= "a ler t">Respon Pengaduan Disimpan</div>'
+                '<div class="alert alert-succes s" rol e= "a ler t">Respon Pengaduan Disimpan</div>'
             );
             redirect('user/laporan');
         }

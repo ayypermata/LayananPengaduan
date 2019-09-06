@@ -36,29 +36,6 @@ class adminm extends CI_Model
     /* Login */
     /*===========================================================================================================================================*/
 
-    function login($username, $password)
-    {
-        //create query to connect user login database
-        $this->db->select('*');
-        $this->db->from('tbl_user');
-        $this->db->WHERE('username', $username);
-        $this->db->WHERE('password', md5($password));
-        $this->db->limit(1);
-
-        //get query and processing
-        $query = $this->db->get();
-        if ($query->num_rows() == 1) {
-            return $query->result(); //if data is true
-        } else {
-            return false; //if data is wrong
-        }
-    }
-
-
-    /*===========================================================================================================================================*/
-    /* Data User */
-    /*===========================================================================================================================================*/
-
     public function id_user()
     {
         $q = $this->db->query("select MAX(RIGHT(id_user,4)) as id_max from tbl_user");
@@ -73,28 +50,6 @@ class adminm extends CI_Model
         }
         return "US-" . $id;
     }
-
-    function get_data_user($id)
-    {
-        return $this->db->query("
-            SELECT *
-            FROM tbl_user
-            WHERE id_user = '$id'
-        ")->result();
-    }
-
-    function find_username($username)
-    {
-        return $this->db->query("
-            SELECT *
-            FROM tbl_user
-            WHERE username = '$username'
-        ")->result();
-    }
-
-    /*===========================================================================================================================================*/
-
-    /*===========================================================================================================================================*/
 
     public function id_customer()
     {
@@ -121,25 +76,40 @@ class adminm extends CI_Model
         ")->result();
     }
 
-    function get_tanggal_masuk($tanggal)
+    function get_tanggal_masuk($tanggal_awal)
     {
         return $this->db->query("
             SELECT *
             FROM tbl_alternatif 
-            WHERE tgl_masuk = '$tanggal'
+            WHERE tgl_masuk = '$tanggal_awal'
         ")->result();
     }
-
-    function get_data_pengambilan($id)
+    function get_data_pengaduan($tanggal)
     {
         return $this->db->query("
             SELECT *
-            FROM tbl_pengambilan a
-            INNER JOIN tbl_customer b ON a.id_customer = b.id_customer
-            INNER JOIN tbl_kurir c ON a.id_kurir = c.id_kurir
-            WHERE a.id_pengambilan = '$id'
-            ORDER BY a.id_pengambilan DESC
+            FROM lapor_aduan 
+            WHERE date_create = '$tanggal'
         ")->result();
+    }
+
+    function get_rentang_tanggal($tanggal_awal, $tanggal_akhir)
+    {
+        return $this->db->query("
+            SELECT *
+            FROM tbl_alternatif 
+            WHERE tgl_masuk between '$tanggal_awal' AND '$tanggal_akhir';
+        ")->result();
+    }
+
+    function get_laporan_per_tanggal($tanggal_awal, $tanggal_akhir)
+    {
+
+        return $this->db->query("
+        SELECT *
+        FROM lapor_aduan 
+        WHERE date_create between '$tanggal_awal' AND '$tanggal_akhir';
+    ")->result();
     }
 
 
@@ -148,24 +118,7 @@ class adminm extends CI_Model
         $this->db->where('id', $id);
         $query = $this->db->get('lapor_aduan');
         return $query->result();
-        // return $this->db->query("
-        //     SELECT *
-        //     FROM lapor_aduan a
-        //     INNER JOIN user b ON a.id = b.id 
-        //     WHERE a.id_user = '$id'
-        //     ORDER BY a.id_lapor DESC
-        // ")->result();
     }
-
-    // SELECT *
-    // FROM tbl_pengambilan a
-    // INNER JOIN tbl_customer b ON a.id_customer = b.id_customer
-    // INNER JOIN tbl_kurir c ON a.id_kurir = c.id_kurir
-    // WHERE a.id_customer = '$id'
-    // ORDER BY a.id_pengambilan DESC
-    /*===========================================================================================================================================*/
-    /*===========================================================================================================================================*/
-
     function get_soal_tipe($id_tipe_soal)
     {
         return $this->db->query("
@@ -193,6 +146,4 @@ class adminm extends CI_Model
             WHERE a.id_soal = '$id_soal' AND a.nilai_jawaban_soal = '$nilai'
         ")->result();
     }
-    /*===========================================================================================================================================*/
-    /*===========================================================================================================================================*/
 }

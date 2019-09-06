@@ -15,9 +15,7 @@
                                     <h1 class="h4 text-gray-900">Ubah Password anda?</h1>
                                     <h5 class="mb-4"><?= $this->session->userdata('reset_email'); ?></h5>
                                 </div>
-
                                 <?= $this->session->flashdata('message'); ?>
-
                                 <form class="user" method="post" action="<?= base_url('auth/changepassword'); ?>">
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user" id="password1" name="password1" placeholder="Enter new password" ?>
@@ -31,15 +29,11 @@
                                         Ubah Password
                                     </button>
                                 </form>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
-
 </div>

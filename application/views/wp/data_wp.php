@@ -11,9 +11,16 @@
                     <div class="row mt">
                         <div class="col-lg-12">
                             <div class="form-panel">
+                                <!-- <form method="post" action="<?php echo site_url('wpc/data_wp'); ?>">
+                                    <label>PILIH TANGGAL</label>
+                                    <input type="date" name="tanggal">
+                                    <input type="submit" value="FILTER">
+                                </form> -->
                                 <form method="post" action="<?php echo site_url('wpc/data_wp'); ?>">
                                     <label>PILIH TANGGAL</label>
-                                    <input type="date" name="tanggal" required>
+                                    <input type="date" name="tanggal_awal">
+                                    <label> sampai tanggal </label>
+                                    <input type="date" name="tanggal_akhir">
                                     <input type="submit" value="FILTER">
                                 </form>
                                 <?php
@@ -33,7 +40,7 @@
                                                     if (isset($data_kriteria)) {
                                                         foreach ($data_kriteria as $row) {
                                                             ?>
-                                                    <th data-sortable="true"><?php echo $row->nm_kriteria; ?></th>
+                                                            <th data-sortable="true"><?php echo $row->nm_kriteria; ?></th>
                                                     <?php }
                                                     }
                                                     ?>
@@ -45,23 +52,21 @@
                                                 if (isset($data_alternatif)) {
                                                     foreach ($data_alternatif as $row) {
                                                         ?>
-
-                                                <tr>
-                                                    <td><?php echo $no++; ?></td>
-                                                    <td><?php echo $row->tgl_masuk; ?></td>
-                                                    <td><?php echo $row->id_alternatif; ?></td>
-                                                    <?php
-                                                            if (isset($data_kriteria)) {
-                                                                foreach ($data_kriteria as $row2) {
+                                                        <tr>
+                                                            <td><?php echo $no++; ?></td>
+                                                            <td><?php echo $row->tgl_masuk; ?></td>
+                                                            <td><?php echo $row->id_alternatif; ?></td>
+                                                            <?php
+                                                                    if (isset($data_kriteria)) {
+                                                                        foreach ($data_kriteria as $row2) {
+                                                                            ?>
+                                                                    <td><a href="#" data-toggle="modal" data-target="#myModal<?php echo $row->id_alternatif; ?>-<?php echo $row2->id_kriteria; ?>"><?php echo value_sub_kriteria($row->id_alternatif, $row2->id_kriteria); ?></a></td>
+                                                            <?php }
+                                                                    }
                                                                     ?>
-                                                    <td><a href="#" data-toggle="modal" data-target="#myModal<?php echo $row->id_alternatif; ?>-<?php echo $row2->id_kriteria; ?>"><?php echo value_sub_kriteria($row->id_alternatif, $row2->id_kriteria); ?></a></td>
-                                                    <?php }
-                                                            }
-                                                            ?>
-                                                </tr>
+                                                        </tr>
                                                 <?php }
                                                 }
-
                                                 ?>
                                             </tbody>
                                         </table>
@@ -100,7 +105,7 @@
                                                     if (isset($data_kriteria)) {
                                                         foreach ($data_kriteria as $row) {
                                                             ?>
-                                                    <th data-sortable="true"><?php echo $row->nm_kriteria; ?></th>
+                                                            <th data-sortable="true"><?php echo $row->nm_kriteria; ?></th>
                                                     <?php }
                                                     }
                                                     ?>
@@ -112,22 +117,23 @@
                                                 if (isset($data_alternatif)) {
                                                     foreach ($data_alternatif as $row) {
                                                         ?>
-                                                <tr>
-                                                    <td><?php echo $no++; ?></td>
-                                                    <td><?php echo $row->tgl_masuk; ?></td>
-                                                    <td><?php echo $row->id_alternatif; ?></td>
-                                                    <?php
-                                                            if (isset($data_kriteria)) {
-                                                                foreach ($data_kriteria as $row2) {
-                                                                    ?>
-                                                    <td><?php echo bobot_value_sub_kriteria($row->id_alternatif, $row2->id_kriteria); ?></td>
-                                                    <?php }
+                                                        <tr>
+                                                            <td><?php echo $no++; ?></td>
+                                                            <td><?php echo $row->tgl_masuk; ?></td>
+                                                            <td><?php echo $row->id_alternatif; ?></td>
+                                                            <?php
+                                                                    if (isset($data_kriteria)) {
+                                                                        foreach ($data_kriteria as $row2) {
+                                                                            ?>
+                                                                    <td><?php echo bobot_value_sub_kriteria($row->id_alternatif, $row2->id_kriteria); ?></td>
+                                                        <?php }
+                                                                }
                                                             }
-                                                        }
-                                                        ?>
-                                                </tr>
-                                                <?php }
-                                                ?>
+                                                            ?>
+                                                        </tr>
+                                                    <?php }
+                                                    ?>
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -173,16 +179,17 @@
                                                             foreach ($data_alternatif as $row) {
                                                                 $total += get_nilai_alternatif($row->id_alternatif);
                                                                 ?>
-                                                        <tr>
-                                                            <td><?php echo $no++; ?></td>
-                                                            <td><?php echo $row->tgl_masuk; ?></td>
-                                                            <td><?php echo $row->id_alternatif; ?></td>
-                                                            <td><?php echo get_nilai_alternatif($row->id_alternatif); ?></td>
-                                                        </tr>
+                                                                <tr>
+                                                                    <td><?php echo $no++; ?></td>
+                                                                    <td><?php echo $row->tgl_masuk; ?></td>
+                                                                    <td><?php echo $row->id_alternatif; ?></td>
+                                                                    <td><?php echo get_nilai_alternatif($row->id_alternatif); ?></td>
+                                                                </tr>
                                                         <?php }
                                                         }
 
                                                         ?>
+
                                                     </tbody>
                                                     <tfoot>
                                                         <th data-sortable="true"></th>
@@ -230,16 +237,16 @@
                                             if (isset($data_alternatif)) {
                                                 foreach ($data_alternatif as $row) {
                                                     ?>
-                                            <tr>
-                                                <td><?php echo $no++; ?></td>
-                                                <td><?php echo $row->tgl_masuk; ?></td>
-                                                <td><?php echo $row->id_alternatif; ?></td>
-                                                <td><?php echo get_nilai_alternatif($row->id_alternatif) / $total; ?></td>
-                                            </tr>
+                                                    <tr>
+                                                        <td><?php echo $no++; ?></td>
+                                                        <td><?php echo $row->tgl_masuk; ?></td>
+                                                        <td><?php echo $row->id_alternatif; ?></td>
+                                                        <td><?php echo get_nilai_alternatif($row->id_alternatif) / $total; ?></td>
+                                                    </tr>
                                             <?php }
                                             }
-
                                             ?>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -252,3 +259,5 @@
             <!-- wrapper -->
             </section>
         </div>
+    </div>
+</div>

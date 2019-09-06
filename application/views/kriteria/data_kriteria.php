@@ -15,9 +15,7 @@
         <div align="left">
             <a href="<?php echo site_url('kriteriac/manage_kriteria'); ?>" class="btn btn-default btn-round"> <i class="fa fa-plus-circle"></i> Tambah
             </a>
-
         </div>
-
 
 
         <div class="card shadow mb-4">
@@ -62,7 +60,7 @@
                                             </a>
                                         </td>
                                     </tr>
-                                <?php }
+                            <?php }
                             }
                             ?>
                         </tbody>

@@ -30,26 +30,26 @@
                     <tbody>
                         <?php $no = 1;
                         foreach ($laporpeng as $l) : ?>
-                        <td><?= $no++ ?></td>
-                        <td><?= $l->kategori ?></td>
-                        <td><?= $l->jenis ?></td>
-                        <td><?= $l->deskripsi ?></td>
-                        <td>
-                            <span class="image-block img-hover">
-                                <a class="image-zoom" href="<?php echo base_url(); ?>/assets/img/upload_lapor/<?= $l->image ?>" data-gal="prettyPhoto[gallery]">
-                                    <img height="300" width="150" src="<?php echo base_url(); ?>/assets/img/upload_lapor/<?= $l->image ?>" class="img-fluid w3layouts agileits" alt="">
-                                </a>
-                            </span>
-                        </td>
-                        <td><?= $l->balasan ?></td>
-                        <td><?= $l->tgl_updateadmin ?></td>
-                        <td><?= $l->status ?></td>
-                        <td>
-                            <a href="<?php echo base_url(); ?>user/responuser/<?php echo $l->id; ?>">
-                                <input type="button" value="Edit" class="tombol small gray"></a>
-                            <a href="<?php echo base_url(); ?>/admin/done/<?php echo $l->id; ?>"><button class="tombol small gray">Selesai</button></a>
-                        </td>
-                        </tr>
+                            <td><?= $no++ ?></td>
+                            <td><?= $l->kategori ?></td>
+                            <td><?= $l->jenis ?></td>
+                            <td><?= $l->deskripsi ?></td>
+                            <td>
+                                <span class="image-block img-hover">
+                                    <a class="image-zoom" href="<?php echo base_url(); ?>/assets/img/upload_lapor/<?= $l->image ?>" data-gal="prettyPhoto[gallery]">
+                                        <img height="300" width="150" src="<?php echo base_url(); ?>/assets/img/upload_lapor/<?= $l->image ?>" class="img-fluid w3layouts agileits" alt="">
+                                    </a>
+                                </span>
+                            </td>
+                            <td><?= $l->balasan ?></td>
+                            <td><?= $l->tgl_updateadmin ?></td>
+                            <td><?= $l->status ?></td>
+                            <td>
+                                <a href="<?php echo base_url(); ?>user/responuser/<?php echo $l->id; ?>">
+                                    <input type="button" value="Edit" class="tombol small gray"></a>
+                                <a href="<?php echo base_url(); ?>/admin/done/<?php echo $l->id; ?>"><button class="tombol small gray">Selesai</button></a>
+                            </td>
+                            </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>

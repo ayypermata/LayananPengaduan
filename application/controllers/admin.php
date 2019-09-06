@@ -20,17 +20,13 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        // if (null !== $this->session->userdata('email')) {
-
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_admin', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('admin/index', $data);
         $this->load->view('templates/footer');
-        // } else {
-        //     redirect('admin/index');
-        // }
     }
+
     public function hasil_kuisioner()
     {
         $data['title'] = 'Dashboard Admin';
@@ -40,17 +36,13 @@ class Admin extends CI_Controller
         $data['active_dashboard'] = 'active';
         $data['data_tipe_soal'] = $this->adminm->getAllData('tbl_tipe_soal');
 
-        // if (null !== $this->session->userdata('email')) {
-
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_admin', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('admin/hasil_kuisioner', $data);
         $this->load->view('templates/footer');
-        // } else {
-        //     redirect('admin/index');
-        // }
     }
+
     public function laporan()
     {
         $data['title'] = 'Laporan Pengaduan';
@@ -58,8 +50,10 @@ class Admin extends CI_Controller
         $this->session->userdata('email')])->row_array();
 
         $q = "SELECT * FROM lapor_aduan WHERE done != 1";
-
         $data['laporpeng'] = $this->db->query($q)->result();
+
+        $tanggal = $this->input->post('tanggal');
+        $data['laporpeng'] = $this->adminm->get_data_pengaduan($tanggal);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_admin', $data);
@@ -97,7 +91,6 @@ class Admin extends CI_Controller
         $q = "SELECT * FROM lapor_aduan WHERE Status = 'Proses'";
 
         $data['laporpeng'] = $this->db->query($q)->result();
-
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_admin', $data);

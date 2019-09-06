@@ -33,11 +33,11 @@
                             if (isset($data_alternatif)) {
                                 foreach ($data_alternatif as $row) {
                                     ?>
-                            <tr>
-                                <td><?php echo $no++; ?></td>
-                                <td><?php echo 'Al-000' . $row->id_alternatif; ?></td>
-                                <!-- <td><?php echo $row->nm_alternatif; ?></td> -->
-                            </tr>
+                                    <tr>
+                                        <td><?php echo $no++; ?></td>
+                                        <td><?php echo 'Al-000' . $row->id_alternatif; ?></td>
+                                        <!-- <td><?php echo $row->nm_alternatif; ?></td> -->
+                                    </tr>
                             <?php }
                             }
                             ?>
@@ -47,41 +47,4 @@
             </div>
         </div>
     </div>
-</section>
-</section>
-
-<!-- <table data-toggle="table" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
-    <thead>
-        <tr>
-            <th data-sortable="true">No</th>
-            <th data-sortable="true">ID</th>
-            <th data-sortable="true">Alternatif</th>
-            <th data-sortable="true">Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        $no = 1;
-        if (isset($data_alternatif)) {
-            foreach ($data_alternatif as $row) {
-                ?>
-        <tr>
-            <td><?php echo $no++; ?></td>
-            <td><?php echo $row->id_alternatif; ?></td>
-            <td><?php echo $row->nm_alternatif; ?></td>
-            <td>
-                <a href="<?php echo site_url('alternatifc/manage_alternatif/' . $row->id_alternatif); ?>" class="btn btn-default btn-xs"> <i class="fa fa-edit"></i> Ubah
-                </a>
-
-                <a href="<?php echo site_url('alternatifc/proses_hapus_alternatif/' . $row->id_alternatif); ?>" class="btn btn-default btn-xs" onclick="return confirm('Yakin ingin menghapus data ? ')"> <i class="fa fa-trash-o"></i> Hapus
-                </a>
-            </td>
-        </tr>
-        <?php }
-        }
-        ?>
-    </tbody>
-</table>
-</div> -->
-
 </section>

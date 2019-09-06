@@ -32,30 +32,6 @@ class m_wp extends CI_Model
         $this->db->insert($table, $data);
     }
 
-    /*===========================================================================================================================================*/
-    /* Login */
-    /*===========================================================================================================================================*/
-
-    function login($username, $password)
-    {
-
-        $this->db->select('*');
-        $this->db->from('tbl_user');
-        $this->db->WHERE('username', $username);
-        $this->db->WHERE('password', md5($password));
-        $this->db->limit(1);
-
-        $query = $this->db->get();
-        if ($query->num_rows() == 1) {
-            return $query->result(); //if data is true
-        } else {
-            return false; //if data is wrong
-        }
-    }
-
-    /*===========================================================================================================================================*/
-    /*===========================================================================================================================================*/
-
     public function id_user()
     {
         $q = $this->db->query("select MAX(RIGHT(id_user,4)) as id_max from tbl_user");

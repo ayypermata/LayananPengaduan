@@ -2,14 +2,6 @@
 
 $CI = &get_instance();
 
-function currency_format($number)
-{
-    if ($number == '') {
-        $number = 0;
-    }
-    return 'Rp ' . number_format($number, 2, ',', '.');
-}
-
 function total_bobot_kriteria($id_kriteria)
 {
     global $CI;

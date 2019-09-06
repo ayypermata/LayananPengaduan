@@ -102,22 +102,11 @@
 
 
     <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        My Profile
-    </div>
-    <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="">
-            <i class="fas fa-fw fa-user"></i>
-            <span>My Profile</span></a>
-    </li>
-    <li class="nav-item">
+    <div class="nav-item">
         <a class="nav-link" href="<?= base_url('auth/logout'); ?> ">
             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
             <span>Logout</span></a>
-    </li>
+    </div>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
